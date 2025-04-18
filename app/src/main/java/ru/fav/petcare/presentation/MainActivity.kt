@@ -2,12 +2,14 @@ package ru.fav.petcare.presentation
 
 import android.os.Bundle
 import android.view.View
+import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.ActivityMainBinding
 import ru.fav.petcare.presentation.base.BaseActivity
 import ru.fav.petcare.presentation.base.NavigationAction
 import ru.fav.petcare.presentation.screens.authorization.AuthorizationFragment
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     override val mainContainerId = R.id.main_fragment_container

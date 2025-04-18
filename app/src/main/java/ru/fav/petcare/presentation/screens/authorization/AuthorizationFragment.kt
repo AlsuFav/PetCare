@@ -3,6 +3,9 @@ package ru.fav.petcare.presentation.screens.authorization
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentAuthorizationBinding
 import ru.fav.petcare.presentation.MainActivity
@@ -12,9 +15,12 @@ import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.presentation.base.NavigationAction
 
+@AndroidEntryPoint
 class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
 
     private var viewBinding: FragmentAuthorizationBinding? = null
+
+    private val authorizationViewModel: AuthorizationViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

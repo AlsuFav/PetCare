@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -68,6 +69,6 @@ dependencies {
     implementation(libs.http.logging.interceptor)
     implementation (libs.okhttp)
 
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
 }

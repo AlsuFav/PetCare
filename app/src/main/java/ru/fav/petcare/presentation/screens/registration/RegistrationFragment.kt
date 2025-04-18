@@ -3,6 +3,8 @@ package ru.fav.petcare.presentation.screens.registration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentRegistrationBinding
 import ru.fav.petcare.presentation.MainActivity
@@ -11,10 +13,15 @@ import ru.fav.petcare.presentation.screens.home.HomeFragment
 import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.presentation.base.NavigationAction
+import ru.fav.petcare.presentation.screens.authorization.AuthorizationViewModel
+import kotlin.getValue
 
+@AndroidEntryPoint
 class RegistrationFragment: Fragment(R.layout.fragment_registration) {
 
     private var viewBinding: FragmentRegistrationBinding? = null
+
+    private val registrationViewModel: RegistrationViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
