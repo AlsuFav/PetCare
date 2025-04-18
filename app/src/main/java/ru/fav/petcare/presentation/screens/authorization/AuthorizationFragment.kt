@@ -2,7 +2,6 @@ package ru.fav.petcare.presentation.screens.authorization
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentAuthorizationBinding
@@ -43,17 +42,18 @@ class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
         val phone = viewBinding?.editTextPhone?.text.toString().trim()
         val password = viewBinding?.editTextPassword?.text.toString().trim()
 
-        val toastText = when {
-            phone.isEmpty() || password.isEmpty() -> R.string.fill_all_fields
-
-            !PhoneValidator.isValid(phone) -> R.string.invalid_phone_format
-
+        val errorText = when {
+            phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
+            !PhoneValidator.isValid(phone) -> getString(R.string.invalid_phone_format)
             else -> null
         }
-        toastText?.let { textRes ->
-            showToast(getString(textRes))
+
+        if (errorText != null) {
+            showError(errorText)
             return
         }
+
+        hideError()
 
         (requireActivity() as? MainActivity)?.showBottomNavigation()
         (requireActivity() as? MainActivity)?.navigate(
@@ -64,9 +64,17 @@ class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
         )
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    private fun showError(message: String) {
+        viewBinding?.textError?.let {
+            it.text = message
+            it.visibility = View.VISIBLE
+        }
     }
+
+    private fun hideError() {
+        viewBinding?.textError?.visibility = View.GONE
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

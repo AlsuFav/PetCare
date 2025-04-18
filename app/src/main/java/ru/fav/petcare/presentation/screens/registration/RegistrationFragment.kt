@@ -2,7 +2,6 @@ package ru.fav.petcare.presentation.screens.registration
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentRegistrationBinding
@@ -53,19 +52,20 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
         val password = viewBinding?.editTextPassword?.text.toString().trim()
         val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
 
-        val toastText = when {
-            surname.isEmpty() || name.isEmpty() || phone.isEmpty() || password.isEmpty() -> R.string.fill_all_fields
-
-            password != confirmPassword -> R.string.passwords_are_not_the_same
-
-            !PhoneValidator.isValid(phone) -> R.string.invalid_phone_format
+        val errorText = when {
+            surname.isEmpty() || name.isEmpty() || phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
+            !PhoneValidator.isValid(phone) -> getString(R.string.invalid_phone_format)
+            password != confirmPassword -> getString(R.string.passwords_are_not_the_same)
 
             else -> null
         }
-        toastText?.let { textRes ->
-            showToast(getString(textRes))
+
+        if (errorText != null) {
+            showError(errorText)
             return
         }
+
+        hideError()
 
         (requireActivity() as? MainActivity)?.showBottomNavigation()
         (requireActivity() as? MainActivity)?.navigate(
@@ -77,8 +77,15 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
 
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    private fun showError(message: String) {
+        viewBinding?.textError?.let {
+            it.text = message
+            it.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideError() {
+        viewBinding?.textError?.visibility = View.GONE
     }
 
     companion object {
