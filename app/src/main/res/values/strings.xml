@@ -12,8 +12,8 @@
     <string name="entry">Вход</string>
     <string name="phone">Номер телефона</string>
     <string name="fill_all_fields">Заполните все поля</string>
-    <string name="surname">Фамилия</string>
-    <string name="name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="first_name">Имя</string>
     <string name="confirm_password">Подтвердите пароль</string>
     <string name="petcare_logo">PetCare logo</string>
     <string name="passwords_are_not_the_same">Пароли не совпадают</string>

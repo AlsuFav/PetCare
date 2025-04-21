@@ -7,13 +7,19 @@ import ru.fav.petcare.domain.models.JwtModel
 import ru.fav.petcare.domain.repository.AuthRepository
 import javax.inject.Inject
 
-class LoginClientUseCase @Inject constructor(
+class RegisterClientUseCase @Inject constructor(
     private val authRepository: AuthRepository,
     @IoDispatchers private val dispatcher: CoroutineDispatcher
 ) {
-    suspend operator fun invoke(phone: String, password: String): JwtModel {
+    suspend operator fun invoke(
+        firstName: String,
+        lastName: String,
+        phone: String,
+        password: String,
+        confirmPassword: String
+    ): JwtModel {
         return withContext(dispatcher) {
-            authRepository.login(phone, password)
+            authRepository.register(firstName, lastName, phone, password, confirmPassword)
         }
     }
 }

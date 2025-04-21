@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.fav.petcare.domain.exceptions.AuthException
+import ru.fav.petcare.domain.exceptions.InvalidCredentialsException
 import ru.fav.petcare.domain.exceptions.NetworkException
 import ru.fav.petcare.domain.exceptions.ServerException
 import ru.fav.petcare.domain.models.JwtModel
@@ -20,7 +20,7 @@ class AuthorizationViewModel @Inject constructor(
     private val loginClientUseCase: LoginClientUseCase
 ): ViewModel() {
     private val _jwtFlow = MutableStateFlow<JwtModel?>(null)
-    val currentWeatherFlow = _jwtFlow.asStateFlow()
+    val jwtFlow = _jwtFlow.asStateFlow()
 
     private val _loadingFlow = MutableStateFlow(false)
     val loadingFlow = _loadingFlow.asStateFlow()
@@ -38,7 +38,7 @@ class AuthorizationViewModel @Inject constructor(
                 _loadingFlow.value = false
             }.onFailure { throwable ->
                 val errorMessage = when (throwable) {
-                    is AuthException -> throwable.message ?: "Неверные данные"
+                    is InvalidCredentialsException -> throwable.message ?: "Неверные данные"
                     is NetworkException -> "Нет подключения к интернету"
                     is ServerException -> throwable.message ?: "Ошибка сервера"
                     else -> "Неизвестная ошибка"

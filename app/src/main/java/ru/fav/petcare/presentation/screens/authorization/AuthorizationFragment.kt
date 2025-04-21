@@ -49,7 +49,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     private fun observeViewModel() = with(authorizationViewModel) {
-        currentWeatherFlow.observe(viewLifecycleOwner) { jwtModel ->
+        jwtFlow.observe(viewLifecycleOwner) { jwtModel ->
             jwtModel?.let {
                 (requireActivity() as? MainActivity)?.apply {
                     showBottomNavigation()

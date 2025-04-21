@@ -14,6 +14,7 @@ import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.presentation.base.NavigationAction
 import ru.fav.petcare.presentation.screens.authorization.AuthorizationViewModel
+import ru.fav.petcare.utils.observe
 import kotlin.getValue
 
 @AndroidEntryPoint
@@ -26,15 +27,20 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = FragmentRegistrationBinding.bind(view)
-
         initViews()
+        observeViewModel()
     }
 
     private fun initViews() {
         viewBinding?.editTextPhone?.addTextChangedListener(PhoneNumberTextWatcher(viewBinding!!.editTextPhone))
 
         viewBinding?.buttonSignUp?.setOnClickListener {
-            registerUser()
+            val firstName = viewBinding?.editTextFirstName?.text.toString().trim()
+            val lastName = viewBinding?.editTextLastName?.text.toString().trim()
+            val phone = viewBinding?.editTextPhone?.text.toString().trim()
+            val password = viewBinding?.editTextPassword?.text.toString().trim()
+            val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
+            register(firstName, lastName, phone, password, confirmPassword)
         }
 
         viewBinding?.buttonSignIn?.setOnClickListener {
@@ -46,21 +52,39 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
         }
     }
 
-        override fun onDestroy() {
-        super.onDestroy()
-        viewBinding = null
+    private fun observeViewModel() = with(registrationViewModel) {
+        jwtFlow.observe(viewLifecycleOwner) { jwtModel ->
+            jwtModel?.let {
+                (requireActivity() as? MainActivity)?.apply {
+                    showBottomNavigation()
+                    navigate(
+                        destination = HomeFragment(),
+                        destinationTag = HomeFragment.HOME_TAG,
+                        action = NavigationAction.REPLACE,
+                        isAddToBackStack = true
+                    )
+                }
+            }
+        }
+
+//        loadingFlow.observe(viewLifecycleOwner) { isLoading ->
+//            viewBinding?.progressBar?.isVisible = isLoading
+//        }
+
+        registrationViewModel.errorFlow.observe(viewLifecycleOwner) { message ->
+            showError(message)
+        }
     }
 
-
-    private fun registerUser() {
-        val surname = viewBinding?.editTextSurname?.text.toString().trim()
-        val name = viewBinding?.editTextName?.text.toString().trim()
-        val phone = viewBinding?.editTextPhone?.text.toString().trim()
-        val password = viewBinding?.editTextPassword?.text.toString().trim()
-        val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
-
+    private fun register(
+        firstName: String,
+        lastName: String,
+        phone: String,
+        password: String,
+        confirmPassword: String
+    ) {
         val errorText = when {
-            surname.isEmpty() || name.isEmpty() || phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
+            lastName.isEmpty() || firstName.isEmpty() || phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
             !PhoneValidator.isValid(phone) -> getString(R.string.invalid_phone_format)
             password != confirmPassword -> getString(R.string.passwords_are_not_the_same)
 
@@ -69,19 +93,10 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
 
         if (errorText != null) {
             showError(errorText)
-            return
+        } else {
+            hideError()
+            registrationViewModel.getJwt(firstName, lastName, phone, password, confirmPassword)
         }
-
-        hideError()
-
-        (requireActivity() as? MainActivity)?.showBottomNavigation()
-        (requireActivity() as? MainActivity)?.navigate(
-            destination = HomeFragment(),
-            destinationTag = HomeFragment.Companion.HOME_TAG,
-            action = NavigationAction.REPLACE,
-            isAddToBackStack = true
-        )
-
     }
 
     private fun showError(message: String) {
@@ -93,6 +108,12 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
 
     private fun hideError() {
         viewBinding?.textError?.visibility = View.GONE
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewBinding = null
     }
 
     companion object {
