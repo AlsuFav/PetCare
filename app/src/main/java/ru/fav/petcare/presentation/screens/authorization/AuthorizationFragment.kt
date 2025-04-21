@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentAuthorizationBinding
@@ -14,9 +13,10 @@ import ru.fav.petcare.presentation.screens.registration.RegistrationFragment
 import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.presentation.base.NavigationAction
+import ru.fav.petcare.utils.observe
 
 @AndroidEntryPoint
-class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
+class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
     private var viewBinding: FragmentAuthorizationBinding? = null
 
@@ -26,28 +26,53 @@ class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = FragmentAuthorizationBinding.bind(view)
         initViews()
+        observeViewModel()
     }
 
-    private fun initViews() {
-        viewBinding?.editTextPhone?.addTextChangedListener(PhoneNumberTextWatcher(viewBinding!!.editTextPhone))
+    private fun initViews() = with(viewBinding) {
+        this?.editTextPhone?.addTextChangedListener(PhoneNumberTextWatcher(this.editTextPhone))
 
-        viewBinding?.buttonSignIn?.setOnClickListener {
-            login()
+        this?.buttonSignIn?.setOnClickListener {
+            val phone = this.editTextPhone.text.toString().trim()
+            val password = this.editTextPassword.text.toString().trim()
+            login(phone, password)
         }
 
-        viewBinding?.buttonSignUp?.setOnClickListener {
+        this?.buttonSignUp?.setOnClickListener {
             (requireActivity() as? MainActivity)?.navigate(
                 destination = RegistrationFragment(),
-                destinationTag = RegistrationFragment.Companion.REGISTRATION_TAG,
+                destinationTag = RegistrationFragment.REGISTRATION_TAG,
                 action = NavigationAction.REPLACE,
-                isAddToBackStack = false)
+                isAddToBackStack = false
+            )
         }
     }
 
-    private fun login() {
-        val phone = viewBinding?.editTextPhone?.text.toString().trim()
-        val password = viewBinding?.editTextPassword?.text.toString().trim()
+    private fun observeViewModel() = with(authorizationViewModel) {
+        currentWeatherFlow.observe(viewLifecycleOwner) { jwtModel ->
+            jwtModel?.let {
+                (requireActivity() as? MainActivity)?.apply {
+                    showBottomNavigation()
+                    navigate(
+                        destination = HomeFragment(),
+                        destinationTag = HomeFragment.HOME_TAG,
+                        action = NavigationAction.REPLACE,
+                        isAddToBackStack = true
+                    )
+                }
+            }
+        }
 
+//        loadingFlow.observe(viewLifecycleOwner) { isLoading ->
+//            viewBinding?.progressBar?.isVisible = isLoading
+//        }
+
+        authorizationViewModel.errorFlow.observe(viewLifecycleOwner) { message ->
+            showError(message)
+        }
+    }
+
+    private fun login(phone: String, password: String) {
         val errorText = when {
             phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
             !PhoneValidator.isValid(phone) -> getString(R.string.invalid_phone_format)
@@ -56,24 +81,16 @@ class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
 
         if (errorText != null) {
             showError(errorText)
-            return
+        } else {
+            hideError()
+            authorizationViewModel.getJwt(phone, password)
         }
-
-        hideError()
-
-        (requireActivity() as? MainActivity)?.showBottomNavigation()
-        (requireActivity() as? MainActivity)?.navigate(
-            destination = HomeFragment(),
-            destinationTag = HomeFragment.Companion.HOME_TAG,
-            action = NavigationAction.REPLACE,
-            isAddToBackStack = true
-        )
     }
 
     private fun showError(message: String) {
-        viewBinding?.textError?.let {
-            it.text = message
-            it.visibility = View.VISIBLE
+        viewBinding?.textError?.apply {
+            text = message
+            visibility = View.VISIBLE
         }
     }
 
@@ -81,9 +98,8 @@ class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
         viewBinding?.textError?.visibility = View.GONE
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         viewBinding = null
     }
 
@@ -91,3 +107,4 @@ class AuthorizationFragment: Fragment(R.layout.fragment_authorization) {
         const val AUTHORIZATION_TAG = "AUTHORIZATION_TAG"
     }
 }
+
