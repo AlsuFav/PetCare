@@ -1,8 +1,0 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.PetCareGroomongSalon" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/gray_dark</item>
-        <item name="android:statusBarColor">@color/gray_dark</item>
-        <item name="android:navigationBarColor">@color/gray_dark</item>
-    </style>
-</resources>
