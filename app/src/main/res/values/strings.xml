@@ -19,8 +19,12 @@
     <string name="passwords_are_not_the_same">Пароли не совпадают</string>
     <string name="invalid_phone_format">Неверный формат номера телефона</string>
 
+    <string name="error_invalid_credentials">Неверные учетные данные</string>
+    <string name="error_network">Нет подключения к интернету</string>
+    <string name="error_server">Ошибка сервера</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="auth_error">Неверные учетные данные</string>
 
 </resources>

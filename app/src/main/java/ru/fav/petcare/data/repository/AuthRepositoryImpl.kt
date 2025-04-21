@@ -25,14 +25,14 @@ class AuthRepositoryImpl @Inject constructor(
             val response = authApi.login(LoginClientRequest(phone, password))
             mapper.map(response)
         } catch (e: IOException) {
-            throw NetworkException("Нет подключения к интернету")
+            throw NetworkException(null)
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val problemDetails = parseProblemDetails(errorBody)
 
             when (e.code()) {
-                401 -> throw AuthException(problemDetails?.detail ?: "Неверные учетные данные")
-                else -> throw ServerException(problemDetails?.detail ?: "Ошибка сервера")
+                401 -> throw AuthException(problemDetails?.detail)
+                else -> throw ServerException(problemDetails?.detail)
             }
         }
     }
