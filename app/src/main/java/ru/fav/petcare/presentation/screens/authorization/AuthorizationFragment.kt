@@ -5,14 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentAuthorizationBinding
-import ru.fav.petcare.presentation.MainActivity
-import ru.fav.petcare.presentation.screens.home.HomeFragment
-import ru.fav.petcare.presentation.screens.registration.RegistrationFragment
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
-import ru.fav.petcare.presentation.base.NavigationAction
 import ru.fav.petcare.utils.observe
 
 @AndroidEntryPoint
@@ -97,31 +94,11 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     private fun navigateToRegistrationFragment() {
-        (requireActivity() as? MainActivity)?.apply {
-            hideBottomNavigation()
-            navigate(
-                destination = RegistrationFragment(),
-                destinationTag = RegistrationFragment.REGISTRATION_TAG,
-                action = NavigationAction.REPLACE,
-                isAddToBackStack = false
-            )
-        }
+        findNavController().navigate(R.id.action_authorization_to_registration)
     }
 
     private fun navigateToHomeFragment() {
-        (requireActivity() as? MainActivity)?.apply {
-            showBottomNavigation()
-            navigate(
-                destination = HomeFragment(),
-                destinationTag = HomeFragment.HOME_TAG,
-                action = NavigationAction.REPLACE,
-                isAddToBackStack = true
-            )
-        }
-    }
-
-    companion object {
-        const val AUTHORIZATION_TAG = "AUTHORIZATION_TAG"
+        findNavController().navigate(R.id.action_authorization_to_home)
     }
 }
 
