@@ -2,6 +2,7 @@ package ru.fav.petcare.presentation.screens.registration
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,10 +11,8 @@ import ru.fav.petcare.databinding.FragmentRegistrationBinding
 import ru.fav.petcare.presentation.MainActivity
 import ru.fav.petcare.presentation.screens.authorization.AuthorizationFragment
 import ru.fav.petcare.presentation.screens.home.HomeFragment
-import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.presentation.base.NavigationAction
-import ru.fav.petcare.presentation.screens.authorization.AuthorizationViewModel
 import ru.fav.petcare.utils.observe
 import kotlin.getValue
 
@@ -40,82 +39,90 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
             val phone = viewBinding?.editTextPhone?.text.toString().trim()
             val password = viewBinding?.editTextPassword?.text.toString().trim()
             val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
-            register(firstName, lastName, phone, password, confirmPassword)
+            registrationViewModel.register(firstName, lastName, phone, password, confirmPassword)
         }
 
         viewBinding?.buttonSignIn?.setOnClickListener {
-            (requireActivity() as? MainActivity)?.navigate(
-                destination = AuthorizationFragment(),
-                destinationTag = AuthorizationFragment.Companion.AUTHORIZATION_TAG,
-                action = NavigationAction.REPLACE,
-                isAddToBackStack = false)
+            navigateToAuthorizationFragment()
         }
     }
 
-    private fun observeViewModel() = with(registrationViewModel) {
-        jwtFlow.observe(viewLifecycleOwner) { jwtModel ->
-            jwtModel?.let {
-                (requireActivity() as? MainActivity)?.apply {
-                    showBottomNavigation()
-                    navigate(
-                        destination = HomeFragment(),
-                        destinationTag = HomeFragment.HOME_TAG,
-                        action = NavigationAction.REPLACE,
-                        isAddToBackStack = true
-                    )
+    private fun observeViewModel() {
+        registrationViewModel.registrationState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is RegistrationState.Initial -> {
+                    showLoading(false)
+                    hideError()
+                }
+                is RegistrationState.Loading -> {
+                    hideError()
+                    showLoading(true)
+                }
+                is RegistrationState.Success -> {
+                    showLoading(false)
+                    hideError()
+                    navigateToHomeFragment()
+                }
+
+                is RegistrationState.Error.FieldError -> {
+                    showLoading(false)
+                    showError(state.message)
+                }
+                is RegistrationState.Error.GlobalError -> {
+                    showLoading(false)
+                    showToast(state.message)
                 }
             }
         }
-
-//        loadingFlow.observe(viewLifecycleOwner) { isLoading ->
-//            viewBinding?.progressBar?.isVisible = isLoading
-//        }
-
-        registrationViewModel.errorFlow.observe(viewLifecycleOwner) { message ->
-            showError(message)
-        }
     }
 
-    private fun register(
-        firstName: String,
-        lastName: String,
-        phone: String,
-        password: String,
-        confirmPassword: String
-    ) {
-        val errorText = when {
-            lastName.isEmpty() || firstName.isEmpty() || phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
-            !PhoneValidator.isValid(phone) -> getString(R.string.invalid_phone_format)
-            password != confirmPassword -> getString(R.string.passwords_are_not_the_same)
-
-            else -> null
-        }
-
-        if (errorText != null) {
-            showError(errorText)
-        } else {
-            hideError()
-            registrationViewModel.getJwt(firstName, lastName, phone, password, confirmPassword)
-        }
+    private fun showLoading(isLoading: Boolean) {
+        viewBinding?.buttonSignIn?.isEnabled = !isLoading
     }
 
     private fun showError(message: String) {
-        viewBinding?.textError?.let {
-            it.text = message
-            it.visibility = View.VISIBLE
+        viewBinding?.textError?.apply {
+            text = message
+            visibility = View.VISIBLE
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun hideError() {
         viewBinding?.textError?.visibility = View.GONE
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding = null
     }
 
+    private fun navigateToAuthorizationFragment() {
+        (requireActivity() as? MainActivity)?.apply {
+            hideBottomNavigation()
+            navigate(
+                destination = AuthorizationFragment(),
+                destinationTag = AuthorizationFragment.AUTHORIZATION_TAG,
+                action = NavigationAction.REPLACE,
+                isAddToBackStack = false
+            )
+        }
+    }
+
+    private fun navigateToHomeFragment() {
+        (requireActivity() as? MainActivity)?.apply {
+            showBottomNavigation()
+            navigate(
+                destination = HomeFragment(),
+                destinationTag = HomeFragment.HOME_TAG,
+                action = NavigationAction.REPLACE,
+                isAddToBackStack = true
+            )
+        }
+    }
     companion object {
         const val REGISTRATION_TAG = "REGISTRATION_TAG"
     }

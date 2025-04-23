@@ -45,8 +45,6 @@ class MainActivity : BaseActivity() {
     }
 
 
-
-
     private fun navigateToAuthorizationFragment() {
         hideBottomNavigation()
         navigate(

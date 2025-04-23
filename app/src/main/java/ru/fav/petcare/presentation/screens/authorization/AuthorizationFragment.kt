@@ -2,6 +2,7 @@ package ru.fav.petcare.presentation.screens.authorization
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,7 +11,6 @@ import ru.fav.petcare.databinding.FragmentAuthorizationBinding
 import ru.fav.petcare.presentation.MainActivity
 import ru.fav.petcare.presentation.screens.home.HomeFragment
 import ru.fav.petcare.presentation.screens.registration.RegistrationFragment
-import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.presentation.base.NavigationAction
 import ru.fav.petcare.utils.observe
@@ -35,56 +35,45 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         this?.buttonSignIn?.setOnClickListener {
             val phone = this.editTextPhone.text.toString().trim()
             val password = this.editTextPassword.text.toString().trim()
-            login(phone, password)
+            authorizationViewModel.authorize(phone, password)
         }
 
         this?.buttonSignUp?.setOnClickListener {
-            (requireActivity() as? MainActivity)?.navigate(
-                destination = RegistrationFragment(),
-                destinationTag = RegistrationFragment.REGISTRATION_TAG,
-                action = NavigationAction.REPLACE,
-                isAddToBackStack = false
-            )
+            navigateToRegistrationFragment()
         }
     }
 
-    private fun observeViewModel() = with(authorizationViewModel) {
-        jwtFlow.observe(viewLifecycleOwner) { jwtModel ->
-            jwtModel?.let {
-                (requireActivity() as? MainActivity)?.apply {
-                    showBottomNavigation()
-                    navigate(
-                        destination = HomeFragment(),
-                        destinationTag = HomeFragment.HOME_TAG,
-                        action = NavigationAction.REPLACE,
-                        isAddToBackStack = true
-                    )
+    private fun observeViewModel() {
+        authorizationViewModel.authorizationState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is AuthorizationState.Initial -> {
+                    showLoading(false)
+                    hideError()
+                }
+                is AuthorizationState.Loading -> {
+                    hideError()
+                    showLoading(true)
+                }
+                is AuthorizationState.Success -> {
+                    showLoading(false)
+                    hideError()
+                    navigateToHomeFragment()
+                }
+
+                is AuthorizationState.Error.FieldError -> {
+                    showLoading(false)
+                    showError(state.message)
+                }
+                is AuthorizationState.Error.GlobalError -> {
+                    showLoading(false)
+                    showToast(state.message)
                 }
             }
         }
-
-//        loadingFlow.observe(viewLifecycleOwner) { isLoading ->
-//            viewBinding?.progressBar?.isVisible = isLoading
-//        }
-
-        authorizationViewModel.errorFlow.observe(viewLifecycleOwner) { message ->
-            showError(message)
-        }
     }
 
-    private fun login(phone: String, password: String) {
-        val errorText = when {
-            phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
-            !PhoneValidator.isValid(phone) -> getString(R.string.invalid_phone_format)
-            else -> null
-        }
-
-        if (errorText != null) {
-            showError(errorText)
-        } else {
-            hideError()
-            authorizationViewModel.getJwt(phone, password)
-        }
+    private fun showLoading(isLoading: Boolean) {
+        viewBinding?.buttonSignIn?.isEnabled = !isLoading
     }
 
     private fun showError(message: String) {
@@ -94,6 +83,10 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         }
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
     private fun hideError() {
         viewBinding?.textError?.visibility = View.GONE
     }
@@ -101,6 +94,30 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding = null
+    }
+
+    private fun navigateToRegistrationFragment() {
+        (requireActivity() as? MainActivity)?.apply {
+            hideBottomNavigation()
+            navigate(
+                destination = RegistrationFragment(),
+                destinationTag = RegistrationFragment.REGISTRATION_TAG,
+                action = NavigationAction.REPLACE,
+                isAddToBackStack = false
+            )
+        }
+    }
+
+    private fun navigateToHomeFragment() {
+        (requireActivity() as? MainActivity)?.apply {
+            showBottomNavigation()
+            navigate(
+                destination = HomeFragment(),
+                destinationTag = HomeFragment.HOME_TAG,
+                action = NavigationAction.REPLACE,
+                isAddToBackStack = true
+            )
+        }
     }
 
     companion object {
