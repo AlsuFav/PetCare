@@ -6,16 +6,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ru.fav.petcare.R
 import ru.fav.petcare.domain.exceptions.InvalidCredentialsException
 import ru.fav.petcare.domain.exceptions.NetworkException
 import ru.fav.petcare.domain.exceptions.ServerException
+import ru.fav.petcare.domain.providers.ResourceProvider
 import ru.fav.petcare.domain.usecases.LoginClientUseCase
 import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthorizationViewModel @Inject constructor(
-    private val loginClientUseCase: LoginClientUseCase
+    private val loginClientUseCase: LoginClientUseCase,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     private val _authorizationState = MutableStateFlow<AuthorizationState>(AuthorizationState.Initial)
@@ -41,8 +44,8 @@ class AuthorizationViewModel @Inject constructor(
 
     private fun validateInputs(phone: String, password: String): String? {
         return when {
-            phone.isEmpty() || password.isEmpty() -> "Заполните все поля"
-            !PhoneValidator.isValid(phone) -> "Неверный формат номера телефона"
+            phone.isEmpty() || password.isEmpty() -> resourceProvider.getString(R.string.error_fill_all_fields)
+            !PhoneValidator.isValid(phone) -> resourceProvider.getString(R.string.error_invalid_phone_format)
             else -> null
         }
     }
@@ -51,19 +54,19 @@ class AuthorizationViewModel @Inject constructor(
         return when (throwable) {
             is InvalidCredentialsException ->
                 AuthorizationState.Error.FieldError(
-                    throwable.message ?: "Неверный логин или пароль"
+                    throwable.message ?: resourceProvider.getString(R.string.error_invalid_credentials)
                 )
 
             is NetworkException ->
-                AuthorizationState.Error.GlobalError("Нет подключения к интернету")
+                AuthorizationState.Error.GlobalError(resourceProvider.getString(R.string.error_network))
 
             is ServerException ->
                 AuthorizationState.Error.GlobalError(
-                    throwable.message ?: "Ошибка сервера"
+                    throwable.message ?: resourceProvider.getString(R.string.error_server)
                 )
 
             else ->
-                AuthorizationState.Error.GlobalError("Неизвестная ошибка")
+                AuthorizationState.Error.GlobalError(resourceProvider.getString(R.string.error_unknown))
         }
     }
 }

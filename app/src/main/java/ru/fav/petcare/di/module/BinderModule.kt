@@ -1,11 +1,12 @@
 package ru.fav.petcare.di.module
 
-import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ru.fav.petcare.data.providers.AndroidResourceProvider
 import ru.fav.petcare.data.repository.AuthRepositoryImpl
+import ru.fav.petcare.domain.providers.ResourceProvider
 import ru.fav.petcare.domain.repository.AuthRepository
 import javax.inject.Singleton
 
@@ -16,5 +17,9 @@ interface BinderModule {
     @Binds
     @Singleton
     fun bindAuthRepositoryToImpl(impl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    @Singleton
+    fun bindResourceProviderToImpl(impl: AndroidResourceProvider): ResourceProvider
 
 }
