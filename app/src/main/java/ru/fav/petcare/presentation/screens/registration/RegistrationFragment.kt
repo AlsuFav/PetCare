@@ -2,93 +2,112 @@ package ru.fav.petcare.presentation.screens.registration
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentRegistrationBinding
-import ru.fav.petcare.presentation.MainActivity
-import ru.fav.petcare.presentation.screens.authorization.AuthorizationFragment
-import ru.fav.petcare.presentation.screens.home.HomeFragment
-import ru.fav.petcare.presentation.utils.validators.PhoneValidator
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
-import ru.fav.petcare.presentation.base.NavigationAction
+import ru.fav.petcare.utils.observe
+import kotlin.getValue
 
+@AndroidEntryPoint
 class RegistrationFragment: Fragment(R.layout.fragment_registration) {
 
     private var viewBinding: FragmentRegistrationBinding? = null
 
+    private val registrationViewModel: RegistrationViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = FragmentRegistrationBinding.bind(view)
-
         initViews()
+        observeViewModel()
     }
 
     private fun initViews() {
         viewBinding?.editTextPhone?.addTextChangedListener(PhoneNumberTextWatcher(viewBinding!!.editTextPhone))
 
         viewBinding?.buttonSignUp?.setOnClickListener {
-            registerUser()
+            val firstName = viewBinding?.editTextFirstName?.text.toString().trim()
+            val lastName = viewBinding?.editTextLastName?.text.toString().trim()
+            val phone = viewBinding?.editTextPhone?.text.toString().trim()
+            val password = viewBinding?.editTextPassword?.text.toString().trim()
+            val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
+            registrationViewModel.register(
+                firstName = firstName,
+                lastName = lastName,
+                phone = phone,
+                password = password,
+                confirmPassword = confirmPassword
+            )
         }
 
         viewBinding?.buttonSignIn?.setOnClickListener {
-            (requireActivity() as? MainActivity)?.navigate(
-                destination = AuthorizationFragment(),
-                destinationTag = AuthorizationFragment.Companion.AUTHORIZATION_TAG,
-                action = NavigationAction.REPLACE,
-                isAddToBackStack = false)
+            navigateToAuthorizationFragment()
         }
     }
 
-        override fun onDestroy() {
-        super.onDestroy()
-        viewBinding = null
+    private fun observeViewModel() {
+        registrationViewModel.registrationState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is RegistrationState.Initial -> {
+                    showLoading(false)
+                    hideError()
+                }
+                is RegistrationState.Loading -> {
+                    hideError()
+                    showLoading(true)
+                }
+                is RegistrationState.Success -> {
+                    showLoading(false)
+                    hideError()
+                    navigateToHomeFragment()
+                }
+
+                is RegistrationState.Error.FieldError -> {
+                    showLoading(false)
+                    showError(state.message)
+                }
+                is RegistrationState.Error.GlobalError -> {
+                    showLoading(false)
+                    showToast(state.message)
+                }
+            }
+        }
     }
 
-
-    private fun registerUser() {
-        val surname = viewBinding?.editTextSurname?.text.toString().trim()
-        val name = viewBinding?.editTextName?.text.toString().trim()
-        val phone = viewBinding?.editTextPhone?.text.toString().trim()
-        val password = viewBinding?.editTextPassword?.text.toString().trim()
-        val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
-
-        val errorText = when {
-            surname.isEmpty() || name.isEmpty() || phone.isEmpty() || password.isEmpty() -> getString(R.string.fill_all_fields)
-            !PhoneValidator.isValid(phone) -> getString(R.string.invalid_phone_format)
-            password != confirmPassword -> getString(R.string.passwords_are_not_the_same)
-
-            else -> null
-        }
-
-        if (errorText != null) {
-            showError(errorText)
-            return
-        }
-
-        hideError()
-
-        (requireActivity() as? MainActivity)?.showBottomNavigation()
-        (requireActivity() as? MainActivity)?.navigate(
-            destination = HomeFragment(),
-            destinationTag = HomeFragment.Companion.HOME_TAG,
-            action = NavigationAction.REPLACE,
-            isAddToBackStack = true
-        )
-
+    private fun showLoading(isLoading: Boolean) {
+        viewBinding?.buttonSignIn?.isEnabled = !isLoading
     }
 
     private fun showError(message: String) {
-        viewBinding?.textError?.let {
-            it.text = message
-            it.visibility = View.VISIBLE
+        viewBinding?.textError?.apply {
+            text = message
+            visibility = View.VISIBLE
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun hideError() {
         viewBinding?.textError?.visibility = View.GONE
     }
 
-    companion object {
-        const val REGISTRATION_TAG = "REGISTRATION_TAG"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewBinding = null
+    }
+
+    private fun navigateToAuthorizationFragment() {
+        findNavController().navigate(R.id.action_registration_to_authorization)
+    }
+
+    private fun navigateToHomeFragment() {
+        findNavController().navigate(R.id.action_registration_to_home)
     }
 }

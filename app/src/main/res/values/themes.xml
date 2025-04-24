@@ -20,6 +20,9 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:navigationBarColor">@color/gray_light</item>
         <item name="android:windowLightStatusBar">true</item>
+
+
+        <item name="materialButtonStyle">@style/Widget.PetCare.Button.Squarish</item>
     </style>
 
     <style name="Theme.PetCare" parent="Base.Theme.PetCare" />

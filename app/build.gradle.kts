@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id ("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -18,6 +20,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "PETCARE_BASE_URL",
+            "\"http://10.0.2.2:8080/api/v1/\""
+        )
     }
 
     buildTypes {
@@ -53,6 +61,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -68,6 +78,6 @@ dependencies {
     implementation(libs.http.logging.interceptor)
     implementation (libs.okhttp)
 
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
 }
