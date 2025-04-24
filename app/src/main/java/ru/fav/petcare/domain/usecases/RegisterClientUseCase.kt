@@ -19,7 +19,13 @@ class RegisterClientUseCase @Inject constructor(
         confirmPassword: String
     ): JwtModel {
         return withContext(dispatcher) {
-            authRepository.register(firstName, lastName, phone, password, confirmPassword)
+            authRepository.register(
+                firstName = firstName,
+                lastName = lastName,
+                phone = phone,
+                password = password,
+                confirmPassword = confirmPassword
+            )
         }
     }
 }

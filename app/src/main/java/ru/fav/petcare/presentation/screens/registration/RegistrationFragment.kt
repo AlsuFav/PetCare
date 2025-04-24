@@ -36,7 +36,13 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
             val phone = viewBinding?.editTextPhone?.text.toString().trim()
             val password = viewBinding?.editTextPassword?.text.toString().trim()
             val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
-            registrationViewModel.register(firstName, lastName, phone, password, confirmPassword)
+            registrationViewModel.register(
+                firstName = firstName,
+                lastName = lastName,
+                phone = phone,
+                password = password,
+                confirmPassword = confirmPassword
+            )
         }
 
         viewBinding?.buttonSignIn?.setOnClickListener {

@@ -32,7 +32,13 @@ class RegistrationViewModel @Inject constructor(
         password: String,
         confirmPassword: String
     ){
-        validateInputs(firstName, lastName, phone, password, confirmPassword)?.let { errorMessage ->
+        validateInputs(
+            firstName = firstName,
+            lastName = lastName,
+            phone = phone,
+            password = password,
+            confirmPassword = confirmPassword
+        )?.let { errorMessage ->
             _registrationState.value = RegistrationState.Error.FieldError(errorMessage)
             return
         }
@@ -41,7 +47,13 @@ class RegistrationViewModel @Inject constructor(
 
         viewModelScope.launch {
             runCatching {
-                registerClientUseCase(firstName, lastName, phone, password, confirmPassword)
+                registerClientUseCase(
+                    firstName = firstName,
+                    lastName = lastName,
+                    phone = phone,
+                    password = password,
+                    confirmPassword = confirmPassword
+                )
             }.fold(
                 onSuccess = { jwt -> _registrationState.value = RegistrationState.Success },
                 onFailure = { e -> _registrationState.value = handleError(e) }

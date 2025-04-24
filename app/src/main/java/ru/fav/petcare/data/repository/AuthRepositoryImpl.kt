@@ -50,11 +50,11 @@ class AuthRepositoryImpl @Inject constructor(
     ): JwtModel {
         return try {
             val response = authApi.register(RegisterClientRequest(
-                firstName,
-                lastName,
-                phone,
-                password,
-                confirmPassword
+                firstName = firstName,
+                lastName = lastName,
+                phone = phone,
+                password = password,
+                confirmPassword = confirmPassword
             ))
             mapper.map(response)
         } catch (e: IOException) {
