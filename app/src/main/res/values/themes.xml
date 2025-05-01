@@ -8,6 +8,7 @@
         <item name="colorPrimaryVariant">@color/brown_medium</item>
         <item name="colorSecondaryVariant">@color/gray_medium</item>
 
+        <item name="colorSurfaceContainerHigh">@color/beige</item>
         <item name="colorSurfaceContainer">@color/gray_light</item>
 
         <item name="colorPrimaryContainer">@color/brown_light</item>

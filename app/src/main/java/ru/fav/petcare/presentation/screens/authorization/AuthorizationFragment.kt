@@ -2,13 +2,13 @@ package ru.fav.petcare.presentation.screens.authorization
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.petcare.R
 import ru.fav.petcare.databinding.FragmentAuthorizationBinding
+import ru.fav.petcare.presentation.utils.ErrorDialogUtil
 import ru.fav.petcare.presentation.utils.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.utils.observe
 
@@ -63,7 +63,11 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
                 }
                 is AuthorizationState.Error.GlobalError -> {
                     showLoading(false)
-                    showToast(state.message)
+
+                    ErrorDialogUtil.showErrorDialog(
+                        context = requireContext(),
+                        message = state.message
+                    )
                 }
             }
         }
@@ -78,10 +82,6 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
             text = message
             visibility = View.VISIBLE
         }
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun hideError() {
