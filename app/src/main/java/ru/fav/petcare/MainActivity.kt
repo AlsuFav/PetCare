@@ -76,6 +76,10 @@ class MainActivity : AppCompatActivity(), Nav.Provider {
                     (nav as? NavMain)?.goToHomePage()
                     true
                 }
+                R.id.menu_profile_tab -> {
+                    (nav as? NavMain)?.goToProfilePage()
+                    true
+                }
                 else -> false
             }
         }

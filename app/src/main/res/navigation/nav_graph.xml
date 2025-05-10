@@ -2,7 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/graph_global"
-    app:startDestination="@id/nav_authorization">
+    app:startDestination="@id/nav_splash">
+
+    <action
+        android:id="@+id/action_global_splash"
+        app:destination="@id/nav_splash"/>
+
+    <include app:graph="@navigation/splash_nav_graph" />
 
     <action
         android:id="@+id/action_global_authorization"
@@ -14,13 +20,17 @@
         android:id="@+id/action_global_registration"
         app:destination="@id/nav_registration"/>
 
-
     <include app:graph="@navigation/registration_nav_graph" />
 
     <action
         android:id="@+id/action_global_home"
         app:destination="@id/nav_home"/>
 
-
     <include app:graph="@navigation/home_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_profile"
+        app:destination="@id/nav_profile"/>
+
+    <include app:graph="@navigation/profile_nav_graph" />
 </navigation>

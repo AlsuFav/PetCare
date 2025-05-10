@@ -6,9 +6,13 @@ interface NavMain {
 
     fun goBack(): Boolean
 
+    fun goToSplashPage()
+
     fun goToAuthorizationPage()
 
     fun goToRegistrationPage()
 
     fun goToHomePage()
+
+    fun goToProfilePage()
 }

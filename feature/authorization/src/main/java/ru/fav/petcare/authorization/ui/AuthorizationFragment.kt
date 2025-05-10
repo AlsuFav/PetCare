@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import dev.androidbroadcast.vbpd.viewBinding
 import ru.fav.petcare.authorization.databinding.FragmentAuthorizationBinding
 import ru.fav.petcare.authorization.R
 import ru.fav.petcare.authorization.ui.state.AuthorizationEvent
@@ -16,27 +17,27 @@ import ru.fav.petcare.util.extension.observe
 @AndroidEntryPoint
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
-    private var viewBinding: FragmentAuthorizationBinding? = null
+    private val viewBinding: FragmentAuthorizationBinding by viewBinding(
+        FragmentAuthorizationBinding::bind)
 
     private val authorizationViewModel: AuthorizationViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding = FragmentAuthorizationBinding.bind(view)
         initViews()
         observeViewModel()
     }
 
     private fun initViews() = with(viewBinding) {
-        this?.editTextPhone?.addTextChangedListener(PhoneNumberTextWatcher(this.editTextPhone))
+        this.editTextPhone.addTextChangedListener(PhoneNumberTextWatcher(this.editTextPhone))
 
-        this?.buttonSignIn?.setOnClickListener {
+        this.buttonSignIn.setOnClickListener {
             val phone = this.editTextPhone.text.toString().trim()
             val password = this.editTextPassword.text.toString().trim()
             authorizationViewModel.reduce(event = AuthorizationEvent.OnSignInClicked(phone, password))
         }
 
-        this?.buttonSignUp?.setOnClickListener {
+        this.buttonSignUp.setOnClickListener {
             authorizationViewModel.reduce(event = AuthorizationEvent.OnSignUpClicked)
         }
     }
@@ -74,23 +75,22 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        viewBinding?.buttonSignIn?.isEnabled = !isLoading
+        viewBinding.buttonSignIn.isEnabled = !isLoading
     }
 
     private fun showError(message: String) {
-        viewBinding?.textError?.apply {
+        viewBinding.textError.apply {
             text = message
             visibility = View.VISIBLE
         }
     }
 
     private fun hideError() {
-        viewBinding?.textError?.visibility = View.GONE
+        viewBinding.textError.visibility = View.GONE
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewBinding = null
     }
 }
 

@@ -20,7 +20,7 @@
         android:title="@string/pets"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_account_tab"
+        android:id="@+id/menu_profile_tab"
         android:orderInCategory="4"
         android:icon="@drawable/ic_person"
         android:title="@string/account"

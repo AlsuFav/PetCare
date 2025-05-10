@@ -11,8 +11,10 @@ import ru.fav.petcare.authorization.ui.state.AuthorizationState
 import ru.fav.petcare.domain.exception.InvalidCredentialsException
 import ru.fav.petcare.domain.exception.NetworkException
 import ru.fav.petcare.domain.exception.ServerException
+import ru.fav.petcare.domain.model.JwtModel
 import ru.fav.petcare.domain.provider.ResourceProvider
 import ru.fav.petcare.domain.usecase.LoginClientUseCase
+import ru.fav.petcare.domain.usecase.SaveJwtUseCase
 import ru.fav.petcare.navigation.NavMain
 import ru.fav.petcare.presentation.R
 import ru.fav.petcare.presentation.util.validators.PhoneValidator
@@ -21,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthorizationViewModel @Inject constructor(
     private val loginClientUseCase: LoginClientUseCase,
+    private val saveJwtUseCase: SaveJwtUseCase,
     private val resourceProvider: ResourceProvider,
     private val navMain: NavMain,
 ) : ViewModel() {
@@ -45,9 +48,10 @@ class AuthorizationViewModel @Inject constructor(
 
         viewModelScope.launch {
             runCatching {
-                loginClientUseCase(phone, password)
+                val jwt = loginClientUseCase(phone, password)
+                saveJwtUseCase(jwt)
             }.fold(
-                onSuccess = { jwt ->
+                onSuccess = {
                     _authorizationState.value = AuthorizationState.Success
                     navigateToHome()
                 },

@@ -49,8 +49,11 @@ dependencies {
     implementation(project(path = ":core:network"))
     implementation(project(path = ":core:util"))
 
+    implementation(project(path = ":feature:splash"))
     implementation(project(path = ":feature:authorization"))
     implementation(project(path = ":feature:registration"))
+    implementation(project(path = ":feature:home"))
+    implementation(project(path = ":feature:profile"))
     implementation(project(path = ":feature:home"))
 
     implementation(libs.androidx.core.ktx)

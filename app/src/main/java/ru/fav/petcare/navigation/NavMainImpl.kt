@@ -18,6 +18,10 @@ class NavMainImpl @Inject constructor(
         return navigatorDelegate.navigateBack()
     }
 
+    override fun goToSplashPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_splash)
+    }
+
     override fun goToAuthorizationPage() {
         navigatorDelegate.navigate(action = R.id.action_global_authorization)
     }
@@ -28,5 +32,9 @@ class NavMainImpl @Inject constructor(
 
     override fun goToHomePage() {
         navigatorDelegate.navigate(action = R.id.action_global_home)
+    }
+
+    override fun goToProfilePage() {
+        navigatorDelegate.navigate(action = R.id.action_global_profile)
     }
 }

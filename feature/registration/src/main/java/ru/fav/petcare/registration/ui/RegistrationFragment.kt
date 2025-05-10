@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.androidbroadcast.vbpd.viewBinding
 import ru.fav.petcare.presentation.util.ErrorDialogUtil
 import ru.fav.petcare.presentation.util.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.registration.R
@@ -18,26 +18,25 @@ import kotlin.getValue
 @AndroidEntryPoint
 class RegistrationFragment: Fragment(R.layout.fragment_registration) {
 
-    private var viewBinding: FragmentRegistrationBinding? = null
+    private val viewBinding: FragmentRegistrationBinding by viewBinding(FragmentRegistrationBinding::bind)
 
     private val registrationViewModel: RegistrationViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding = FragmentRegistrationBinding.bind(view)
         initViews()
         observeViewModel()
     }
 
     private fun initViews() {
-        viewBinding?.editTextPhone?.addTextChangedListener(PhoneNumberTextWatcher(viewBinding!!.editTextPhone))
+        viewBinding.editTextPhone.addTextChangedListener(PhoneNumberTextWatcher(viewBinding.editTextPhone))
 
-        viewBinding?.buttonSignUp?.setOnClickListener {
-            val firstName = viewBinding?.editTextFirstName?.text.toString().trim()
-            val lastName = viewBinding?.editTextLastName?.text.toString().trim()
-            val phone = viewBinding?.editTextPhone?.text.toString().trim()
-            val password = viewBinding?.editTextPassword?.text.toString().trim()
-            val confirmPassword = viewBinding?.editTextConfirmPassword?.text.toString().trim()
+        viewBinding.buttonSignUp.setOnClickListener {
+            val firstName = viewBinding.editTextFirstName.text.toString().trim()
+            val lastName = viewBinding.editTextLastName.text.toString().trim()
+            val phone = viewBinding.editTextPhone.text.toString().trim()
+            val password = viewBinding.editTextPassword.text.toString().trim()
+            val confirmPassword = viewBinding.editTextConfirmPassword.text.toString().trim()
             registrationViewModel.reduce(event = RegistrationEvent.OnSignUpClicked(
                 firstName = firstName,
                 lastName = lastName,
@@ -47,7 +46,7 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
             ))
         }
 
-        viewBinding?.buttonSignIn?.setOnClickListener {
+        viewBinding.buttonSignIn.setOnClickListener {
             registrationViewModel.reduce(event = RegistrationEvent.OnSignInClicked)
         }
     }
@@ -85,22 +84,21 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        viewBinding?.buttonSignIn?.isEnabled = !isLoading
+        viewBinding.buttonSignIn.isEnabled = !isLoading
     }
 
     private fun showError(message: String) {
-        viewBinding?.textError?.apply {
+        viewBinding.textError.apply {
             text = message
             visibility = View.VISIBLE
         }
     }
 
     private fun hideError() {
-        viewBinding?.textError?.visibility = View.GONE
+        viewBinding.textError.visibility = View.GONE
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewBinding = null
     }
 }

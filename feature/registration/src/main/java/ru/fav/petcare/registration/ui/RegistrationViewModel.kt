@@ -12,6 +12,7 @@ import ru.fav.petcare.domain.exception.NetworkException
 import ru.fav.petcare.domain.exception.ServerException
 import ru.fav.petcare.domain.provider.ResourceProvider
 import ru.fav.petcare.domain.usecase.RegisterClientUseCase
+import ru.fav.petcare.domain.usecase.SaveJwtUseCase
 import ru.fav.petcare.navigation.NavMain
 import ru.fav.petcare.presentation.R
 import ru.fav.petcare.presentation.util.validators.PhoneValidator
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val registerClientUseCase: RegisterClientUseCase,
+    private val saveJwtUseCase: SaveJwtUseCase,
     private val resourceProvider: ResourceProvider,
     private val navMain: NavMain,
 ): ViewModel() {
@@ -63,15 +65,16 @@ class RegistrationViewModel @Inject constructor(
 
         viewModelScope.launch {
             runCatching {
-                registerClientUseCase(
+                val jwt = registerClientUseCase(
                     firstName = firstName,
                     lastName = lastName,
                     phone = phone,
                     password = password,
                     confirmPassword = confirmPassword
                 )
+                saveJwtUseCase(jwt)
             }.fold(
-                onSuccess = { jwt ->
+                onSuccess = {
                     _registrationState.value = RegistrationState.Success
                     navigateToHome()
                 },
