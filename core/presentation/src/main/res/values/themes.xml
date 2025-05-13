@@ -17,9 +17,6 @@
         <item name="colorSecondaryContainer">@color/brown_medium</item>
         <item name="colorOnSecondaryContainer">@color/white</item>
 
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:navigationBarColor">@color/gray_light</item>
         <item name="android:windowLightStatusBar">true</item>
 
 

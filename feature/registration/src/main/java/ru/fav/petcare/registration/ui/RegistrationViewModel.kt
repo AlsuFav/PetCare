@@ -91,7 +91,8 @@ class RegistrationViewModel @Inject constructor(
         confirmPassword: String
     ): String? {
         return when {
-            lastName.isEmpty() || firstName.isEmpty() || phone.isEmpty() || password.isEmpty() -> resourceProvider.getString(R.string.error_fill_all_fields)
+            lastName.isEmpty() || firstName.isEmpty() || phone.isEmpty()
+                    || password.isEmpty() || confirmPassword.isEmpty() -> resourceProvider.getString(R.string.error_fill_all_fields)
             !PhoneValidator.isValid(phone) -> resourceProvider.getString(R.string.error_invalid_phone_format)
             password != confirmPassword -> resourceProvider.getString(R.string.error_passwords_are_not_the_same)
             else -> null

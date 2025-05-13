@@ -33,4 +33,10 @@
         app:destination="@id/nav_profile"/>
 
     <include app:graph="@navigation/profile_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_safety"
+        app:destination="@id/nav_safety"/>
+
+    <include app:graph="@navigation/safety_nav_graph" />
 </navigation>

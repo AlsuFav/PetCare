@@ -1,0 +1,11 @@
+<resources>
+    <string name="confirm_delete_account_message">Вы уверены, что хотите удалить свой аккаунт?</string>
+    <string name="password_updated_successfully">Ваш пароль обновлен</string>
+    <string name="account_deleted_successfully">Ваш аккаунт удален</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="delete_account">Удалить аккаунт</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="confirm_new_password">Подтвердите новый пароль</string>
+
+    <string name="error_invalid_current_password">Неверный текущий пароль</string>
+</resources>

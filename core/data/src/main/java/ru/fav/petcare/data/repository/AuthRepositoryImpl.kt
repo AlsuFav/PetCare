@@ -3,6 +3,7 @@ package ru.fav.petcare.data.repository
 import retrofit2.HttpException
 import ru.fav.petcare.data.mapper.JwtMapper
 import ru.fav.petcare.data.util.ErrorParser.parseProblemDetails
+import ru.fav.petcare.data.util.HttpStatusCodes
 import ru.fav.petcare.domain.exception.ClientAlreadyExistsException
 import ru.fav.petcare.domain.exception.InvalidCredentialsException
 import ru.fav.petcare.domain.exception.NetworkException
@@ -35,7 +36,7 @@ class AuthRepositoryImpl @Inject constructor(
             val problemDetails = parseProblemDetails(errorBody)
 
             when (e.code()) {
-                401 -> throw InvalidCredentialsException(problemDetails?.detail)
+                HttpStatusCodes.UNAUTHORIZED -> throw InvalidCredentialsException(problemDetails?.detail)
                 else -> throw ServerException(problemDetails?.detail)
             }
         }
@@ -64,7 +65,7 @@ class AuthRepositoryImpl @Inject constructor(
             val problemDetails = parseProblemDetails(errorBody)
 
             when (e.code()) {
-                409 -> throw ClientAlreadyExistsException(problemDetails?.detail)
+                HttpStatusCodes.CONFLICT -> throw ClientAlreadyExistsException(problemDetails?.detail)
                 else -> throw ServerException(problemDetails?.detail)
             }
         }

@@ -54,6 +54,7 @@ dependencies {
     implementation(project(path = ":feature:registration"))
     implementation(project(path = ":feature:home"))
     implementation(project(path = ":feature:profile"))
+    implementation(project(path = ":feature:safety"))
     implementation(project(path = ":feature:home"))
 
     implementation(libs.androidx.core.ktx)

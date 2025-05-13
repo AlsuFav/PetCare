@@ -10,6 +10,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.fav.petcare.network.BuildConfig.PETCARE_BASE_URL
 import ru.fav.petcare.network.AuthApi
+import ru.fav.petcare.network.ClientApi
+import ru.fav.petcare.network.interceptor.JwtInterceptor
 import javax.inject.Singleton
 
 @Module
@@ -17,13 +19,16 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(
+        jwtInterceptor: JwtInterceptor
+    ): OkHttpClient {
         val logging = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
         return OkHttpClient.Builder()
             .addInterceptor(logging)
+            .addInterceptor(jwtInterceptor)
             .build()
     }
 
@@ -45,5 +50,20 @@ class NetworkModule {
             .build()
 
         return retrofit.create(AuthApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideClientApi(
+        okHttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory,
+    ): ClientApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(PETCARE_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+
+        return retrofit.create(ClientApi::class.java)
     }
 }

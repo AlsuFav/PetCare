@@ -1,4 +1,5 @@
 <resources>
+    <string name="confirm_password">Подтвердите пароль</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="entry">Вход</string>
 </resources>

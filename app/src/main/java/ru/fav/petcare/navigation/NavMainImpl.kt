@@ -1,6 +1,5 @@
 package ru.fav.petcare.navigation
 
-import android.os.Bundle
 import ru.fav.petcare.app.R
 import javax.inject.Inject
 
@@ -36,5 +35,9 @@ class NavMainImpl @Inject constructor(
 
     override fun goToProfilePage() {
         navigatorDelegate.navigate(action = R.id.action_global_profile)
+    }
+
+    override fun goToSafetyPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_safety)
     }
 }
