@@ -46,10 +46,7 @@ class ProfileViewModel @Inject constructor(
     private val _clearJwtState = MutableStateFlow<ClearJwtState>(ClearJwtState.Initial)
     val clearJwtState = _clearJwtState.asStateFlow()
 
-    private val _effect = MutableSharedFlow<ProfileEffect>(
-        replay = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
-    )
+    private val _effect = MutableSharedFlow<ProfileEffect>()
     val effect = _effect.asSharedFlow()
 
     fun reduce(event: ProfileEvent) {
@@ -91,6 +88,8 @@ class ProfileViewModel @Inject constructor(
         lastName: String,
         phone: String
     ) {
+        _updateProfileState.value = UpdateProfileState.Loading
+
         validateInputs(
             firstName = firstName,
             lastName = lastName,
@@ -99,8 +98,6 @@ class ProfileViewModel @Inject constructor(
             _updateProfileState.value = UpdateProfileState.Error.FieldError(errorMessage)
             return
         }
-
-        _updateProfileState.value = UpdateProfileState.Loading
 
         viewModelScope.launch {
             runCatching {

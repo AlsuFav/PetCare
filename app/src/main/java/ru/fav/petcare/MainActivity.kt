@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity(), Nav.Provider {
 
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-//                ru.fav.petcare.splash.R.id.destination_splash -> hideBottomNavigation()
                 ru.fav.petcare.authorization.R.id.destination_authorization -> hideBottomNavigation()
                 ru.fav.petcare.registration.R.id.destination_registration -> hideBottomNavigation()
                 else -> showBottomNavigation()
@@ -66,17 +65,17 @@ class MainActivity : AppCompatActivity(), Nav.Provider {
     }
 
     private fun setupBottomNavigation() {
-        navController?.let {
-            viewBinding.mainBottomNavigation.setupWithNavController(it)
+        navController?.let { controller ->
+            viewBinding.mainBottomNavigation.setupWithNavController(controller)
         }
 
         viewBinding.mainBottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.menu_home_tab -> {
+                R.id.nav_home -> {
                     (nav as? NavMain)?.goToHomePage()
                     true
                 }
-                R.id.menu_profile_tab -> {
+                R.id.nav_profile -> {
                     (nav as? NavMain)?.goToProfilePage()
                     true
                 }

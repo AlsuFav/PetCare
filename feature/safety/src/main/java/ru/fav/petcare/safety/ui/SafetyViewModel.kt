@@ -42,10 +42,7 @@ class SafetyViewModel @Inject constructor(
     private val _deleteClientState = MutableStateFlow<DeleteClientState>(DeleteClientState.Initial)
     val deleteClientState = _deleteClientState.asStateFlow()
 
-    private val _effect = MutableSharedFlow<SafetyEffect>(
-        replay = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
-    )
+    private val _effect = MutableSharedFlow<SafetyEffect>()
     val effect = _effect.asSharedFlow()
 
     fun reduce(event: SafetyEvent) {
@@ -75,6 +72,8 @@ class SafetyViewModel @Inject constructor(
         newPassword: String,
         confirmNewPassword: String
     ) {
+        _updatePasswordState.value = UpdatePasswordState.Loading
+
         validateInputs(
             currentPassword = currentPassword,
             newPassword = newPassword,
@@ -83,8 +82,6 @@ class SafetyViewModel @Inject constructor(
             _updatePasswordState.value = UpdatePasswordState.Error.FieldError(errorMessage)
             return
         }
-
-        _updatePasswordState.value = UpdatePasswordState.Loading
 
         viewModelScope.launch {
             runCatching {
