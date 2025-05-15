@@ -10,9 +10,9 @@ import ru.fav.petcare.authorization.databinding.FragmentAuthorizationBinding
 import ru.fav.petcare.authorization.R
 import ru.fav.petcare.authorization.ui.state.AuthorizationEvent
 import ru.fav.petcare.authorization.ui.state.AuthorizationState
-import ru.fav.petcare.presentation.util.ErrorDialogUtil
 import ru.fav.petcare.presentation.util.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.util.extension.observe
+import ru.fav.petcare.util.extension.showErrorDialog
 
 @AndroidEntryPoint
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
@@ -65,8 +65,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
                 is AuthorizationState.Error.GlobalError -> {
                     showLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }

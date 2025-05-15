@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
-import ru.fav.petcare.presentation.util.ErrorDialogUtil
 import ru.fav.petcare.presentation.util.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.registration.R
 import ru.fav.petcare.registration.databinding.FragmentRegistrationBinding
 import ru.fav.petcare.registration.ui.state.RegistrationEvent
 import ru.fav.petcare.registration.ui.state.RegistrationState
 import ru.fav.petcare.util.extension.observe
+import ru.fav.petcare.util.extension.showErrorDialog
 import kotlin.getValue
 
 @AndroidEntryPoint
@@ -74,8 +74,7 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
                 is RegistrationState.Error.GlobalError -> {
                     showLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }

@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
-import ru.fav.petcare.presentation.util.ErrorDialogUtil
 import ru.fav.petcare.splash.R
 import ru.fav.petcare.splash.databinding.FragmentSplashBinding
 import ru.fav.petcare.splash.ui.state.SplashEvent
 import ru.fav.petcare.splash.ui.state.SplashState
 import ru.fav.petcare.util.extension.observe
+import ru.fav.petcare.util.extension.showErrorDialog
 
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
@@ -35,8 +35,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                 is SplashState.Error.NoApiKey -> {}
 
                 is SplashState.Error.GlobalError -> {
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }

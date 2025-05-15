@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
 import ru.fav.petcare.domain.model.ClientModel
 import ru.fav.petcare.profile.databinding.FragmentProfileBinding
-import ru.fav.petcare.presentation.util.ErrorDialogUtil
 import ru.fav.petcare.presentation.util.watchers.PhoneNumberTextWatcher
 import ru.fav.petcare.profile.R
 import ru.fav.petcare.profile.ui.state.ClearJwtState
@@ -20,6 +19,7 @@ import ru.fav.petcare.profile.ui.state.ProfileState
 import ru.fav.petcare.profile.ui.state.UpdateProfileState
 import ru.fav.petcare.util.extension.observe
 import ru.fav.petcare.util.extension.observeNotSuspend
+import ru.fav.petcare.util.extension.showErrorDialog
 import kotlin.getValue
 
 @AndroidEntryPoint
@@ -91,8 +91,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 is ProfileState.Error -> {
                     showLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }
@@ -122,8 +121,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 is UpdateProfileState.Error.GlobalError -> {
                     showUpdateLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }
@@ -145,8 +143,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 is ClearJwtState.Error -> {
                     showLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }

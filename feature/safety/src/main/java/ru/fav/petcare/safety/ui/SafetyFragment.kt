@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
-import ru.fav.petcare.presentation.util.ErrorDialogUtil
 import ru.fav.petcare.safety.R
 import ru.fav.petcare.safety.databinding.FragmentSafetyBinding
 import ru.fav.petcare.safety.ui.state.DeleteClientState
@@ -17,6 +16,8 @@ import ru.fav.petcare.safety.ui.state.SafetyEvent
 import ru.fav.petcare.safety.ui.state.UpdatePasswordState
 import ru.fav.petcare.util.extension.observe
 import ru.fav.petcare.util.extension.observeNotSuspend
+import ru.fav.petcare.util.extension.showConfirmationDialog
+import ru.fav.petcare.util.extension.showErrorDialog
 import kotlin.getValue
 
 @AndroidEntryPoint
@@ -69,8 +70,7 @@ class SafetyFragment: Fragment(R.layout.fragment_safety) {
             when (state) {
                 is SafetyEffect.ShowToast -> showToast(state.message)
                 is SafetyEffect.ShowDeleteAccountConfirmation ->
-                    ErrorDialogUtil.showConfirmationDialog(
-                    context = requireContext(),
+                    showConfirmationDialog(
                     message = state.message,
                     positiveAction = {
                         safetyViewModel.reduce(event = SafetyEvent.OnConfirmDeleteAccountClicked)
@@ -103,8 +103,7 @@ class SafetyFragment: Fragment(R.layout.fragment_safety) {
                 is UpdatePasswordState.Error.GlobalError -> {
                     showUpdateLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }
@@ -126,8 +125,7 @@ class SafetyFragment: Fragment(R.layout.fragment_safety) {
                 is DeleteClientState.Error -> {
                     showDeleteAccountButtonLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }
