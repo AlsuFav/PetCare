@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">PetCare</string>
+    <string name="petcare_logo">PetCare logo</string>
+
+    <string name="ok">OK</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <string name="pets">Питомцы</string>
+    <string name="account">Аккаунт</string>
+    <string name="appointments">Записи</string>
+    <string name="home">Главная</string>
+
+    <string name="phone">Номер телефона</string>
+    <string name="last_name">Фамилия</string>
+    <string name="first_name">Имя</string>
+    <string name="password">Пароль</string>
+
+    <string name="safety">Безопасность</string>
+
+    <string name="error_title">Ошибка</string>
+    <string name="confirmation_title">Подтверждение</string>
+
+    <string name="edit">Редактировать</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отменить</string>
+    <string name="back">Назад</string>
+
+    <string name="error_fill_all_fields">Заполните все поля</string>
+    <string name="error_passwords_are_not_the_same">Пароли не совпадают</string>
+    <string name="error_invalid_phone_format">Неверный формат номера телефона</string>
+    <string name="error_invalid_credentials">Неверные учетные данные</string>
+    <string name="error_unauthorized">Пожалуйста, войдите снова</string>
+    <string name="error_network">Нет подключения к интернету</string>
+    <string name="error_server">Ошибка сервера</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
+    <string name="error_client_already_exists">Пользователь с таким номером уже существует</string>
+
+</resources>

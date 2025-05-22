@@ -1,0 +1,4 @@
+<resources>
+    <string name="log_out">Выйти</string>
+    <string name="data_updated_successfully">Ваши данные сохранены</string>
+</resources>
