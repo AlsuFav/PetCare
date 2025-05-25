@@ -3,7 +3,6 @@ package ru.fav.petcare.profile.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -15,9 +14,9 @@ import ru.fav.petcare.domain.exception.NotFoundException
 import ru.fav.petcare.domain.exception.ServerException
 import ru.fav.petcare.domain.exception.UnauthorizedException
 import ru.fav.petcare.domain.provider.ResourceProvider
-import ru.fav.petcare.domain.usecase.ClearJwtUseCase
-import ru.fav.petcare.domain.usecase.GetClientDataUseCase
-import ru.fav.petcare.domain.usecase.UpdateClientDataUseCase
+import ru.fav.petcare.domain.usecase.jwt.ClearJwtUseCase
+import ru.fav.petcare.domain.usecase.client.GetClientDataUseCase
+import ru.fav.petcare.domain.usecase.client.UpdateClientDataUseCase
 import ru.fav.petcare.navigation.NavMain
 import ru.fav.petcare.profile.ui.state.ClearJwtState
 import ru.fav.petcare.profile.ui.state.ProfileEffect

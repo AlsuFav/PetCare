@@ -75,6 +75,10 @@ class MainActivity : AppCompatActivity(), Nav.Provider {
                     (nav as? NavMain)?.goToHomePage()
                     true
                 }
+                R.id.nav_pet -> {
+                    (nav as? NavMain)?.goToAllPetsPage()
+                    true
+                }
                 R.id.nav_profile -> {
                     (nav as? NavMain)?.goToProfilePage()
                     true

@@ -1,5 +1,6 @@
 package ru.fav.petcare.navigation
 
+import android.os.Bundle
 import ru.fav.petcare.app.R
 import javax.inject.Inject
 
@@ -39,5 +40,23 @@ class NavMainImpl @Inject constructor(
 
     override fun goToSafetyPage() {
         navigatorDelegate.navigate(action = R.id.action_global_safety)
+    }
+
+    override fun goToAllPetsPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_all_pets)
+    }
+
+    override fun goToAddPetPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_add_pet)
+    }
+
+    override fun goToPetDetailsPage(id: Long) {
+        val args = Bundle().apply {
+            putLong("id", id)
+        }
+        navigatorDelegate.navigate(
+            action = R.id.action_global_pet_details,
+            args = args
+        )
     }
 }

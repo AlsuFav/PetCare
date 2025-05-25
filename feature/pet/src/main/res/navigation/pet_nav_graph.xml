@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_pet"
+    app:startDestination="@id/destination_all_pets">
+
+    <fragment
+        android:id="@+id/destination_all_pets"
+        android:name="ru.fav.petcare.pet.all.AllPetsFragment"
+        android:label="All pets">
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_add_pet"
+        android:name="ru.fav.petcare.pet.add.AddPetFragment"
+        android:label="Add pet">
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_pet_details"
+        android:name="ru.fav.petcare.pet.details.PetDetailsFragment"
+        android:label="Pet details">
+
+        <argument
+            android:name="id"
+            app:argType="long"/>
+    </fragment>
+</navigation>

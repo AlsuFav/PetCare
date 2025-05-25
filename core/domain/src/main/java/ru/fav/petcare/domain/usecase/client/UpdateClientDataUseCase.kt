@@ -1,4 +1,4 @@
-package ru.fav.petcare.domain.usecase
+package ru.fav.petcare.domain.usecase.client
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -6,20 +6,20 @@ import ru.fav.petcare.domain.di.qualifier.IoDispatchers
 import ru.fav.petcare.domain.repository.ClientRepository
 import javax.inject.Inject
 
-class ChangePasswordUseCase @Inject constructor(
+class UpdateClientDataUseCase @Inject constructor(
     private val clientRepository: ClientRepository,
     @IoDispatchers private val dispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(
-        currentPassword: String,
-        newPassword: String,
-        confirmNewPassword: String
+        firstName: String,
+        lastName: String,
+        phone: String
     ) {
         withContext(dispatcher) {
-            clientRepository.changePassword(
-                currentPassword = currentPassword,
-                newPassword = newPassword,
-                confirmNewPassword = confirmNewPassword
+            clientRepository.updateClientData(
+                firstName = firstName,
+                lastName = lastName,
+                phone = phone
             )
         }
     }

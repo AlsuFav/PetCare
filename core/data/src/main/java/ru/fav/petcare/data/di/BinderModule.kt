@@ -5,15 +5,21 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.fav.petcare.data.provider.AndroidResourceProvider
+import ru.fav.petcare.data.provider.DateProviderImpl
 import ru.fav.petcare.data.provider.JwtProviderImpl
 import ru.fav.petcare.data.repository.AuthRepositoryImpl
+import ru.fav.petcare.data.repository.BreedRepositoryImpl
 import ru.fav.petcare.data.repository.ClientRepositoryImpl
 import ru.fav.petcare.data.repository.JwtRepositoryImpl
+import ru.fav.petcare.data.repository.PetRepositoryImpl
+import ru.fav.petcare.domain.repository.BreedRepository
+import ru.fav.petcare.domain.provider.DateProvider
 import ru.fav.petcare.domain.provider.JwtProvider
 import ru.fav.petcare.domain.provider.ResourceProvider
 import ru.fav.petcare.domain.repository.AuthRepository
 import ru.fav.petcare.domain.repository.ClientRepository
 import ru.fav.petcare.domain.repository.JwtRepository
+import ru.fav.petcare.domain.repository.PetRepository
 import javax.inject.Singleton
 
 @Module
@@ -28,10 +34,13 @@ interface BinderModule {
     @Singleton
     fun bindClientRepositoryToImpl(impl: ClientRepositoryImpl): ClientRepository
 
+    @Binds
+    @Singleton
+    fun bindPetRepositoryToImpl(impl: PetRepositoryImpl): PetRepository
 
     @Binds
     @Singleton
-    fun bindResourceProviderToImpl(impl: AndroidResourceProvider): ResourceProvider
+    fun bindBreedRepositoryToImpl(impl: BreedRepositoryImpl): BreedRepository
 
     @Binds
     @Singleton
@@ -39,5 +48,14 @@ interface BinderModule {
 
     @Binds
     @Singleton
+    fun bindResourceProviderToImpl(impl: AndroidResourceProvider): ResourceProvider
+
+    @Binds
+    @Singleton
     fun bindJwtProviderToImpl(impl: JwtProviderImpl): JwtProvider
+
+    @Binds
+    @Singleton
+    fun bindDateProviderToImpl(impl: DateProviderImpl): DateProvider
+
 }

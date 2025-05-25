@@ -39,4 +39,18 @@
         app:destination="@id/nav_safety"/>
 
     <include app:graph="@navigation/safety_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_all_pets"
+        app:destination="@id/nav_pet"/>
+
+    <action
+        android:id="@+id/action_global_add_pet"
+        app:destination="@id/destination_add_pet"/>
+
+    <action
+        android:id="@+id/action_global_pet_details"
+        app:destination="@id/destination_pet_details"/>
+
+    <include app:graph="@navigation/pet_nav_graph" />
 </navigation>

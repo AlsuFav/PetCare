@@ -1,4 +1,4 @@
-package ru.fav.petcare.domain.usecase
+package ru.fav.petcare.domain.usecase.jwt
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

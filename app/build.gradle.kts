@@ -55,7 +55,7 @@ dependencies {
     implementation(project(path = ":feature:home"))
     implementation(project(path = ":feature:profile"))
     implementation(project(path = ":feature:safety"))
-    implementation(project(path = ":feature:home"))
+    implementation(project(path = ":feature:pet"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

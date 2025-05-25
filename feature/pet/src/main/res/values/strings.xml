@@ -1,0 +1,24 @@
+<resources>
+    <string name="cat">Кошка</string>
+    <string name="dog">Собака</string>
+
+    <string name="pet_photo">Фотография питомца</string>
+    <string name="pet_name">Имя питомца</string>
+    <string name="birth_date_01_01_2025">01.01.2025</string>
+    <string name="add_pet">Добавить питомца</string>
+    <string name="no_pets">Список питомцев пуст. Добавьте питомца</string>
+    <string name="species">Вид</string>
+    <string name="breed">Порода</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="name">Имя</string>
+    <string name="choose_photo">Выбрать фотографию</string>
+    <string name="deletePet">Удалить питомца</string>
+
+    <string name="pet_data_updated_successfully">Данные питомца обновлены</string>
+    <string name="pet_created_successfully">Питомец добавлен</string>
+
+    <string name="confirm_delete_pet_message">Вы уверены, что хотите удалить питомца?</string>
+
+    <string name="error_invalid_breed">Пожалуйста, выберите породу из списка</string>
+    <string name="pet_deleted_successfully">Питомец удален</string>
+</resources>

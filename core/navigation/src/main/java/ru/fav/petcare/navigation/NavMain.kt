@@ -17,4 +17,10 @@ interface NavMain {
     fun goToProfilePage()
 
     fun goToSafetyPage()
+
+    fun goToAllPetsPage()
+
+    fun goToAddPetPage()
+
+    fun goToPetDetailsPage(id: Long)
 }
