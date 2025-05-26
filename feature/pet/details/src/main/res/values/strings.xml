@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="choose_photo">Выбрать фотографию</string>
+    <string name="deletePet">Удалить питомца</string>
+
+    <string name="pet_data_updated_successfully">Данные питомца обновлены</string>
+
+    <string name="confirm_delete_pet_message">Вы уверены, что хотите удалить питомца?</string>
+
+    <string name="pet_deleted_successfully">Питомец удален</string>
+</resources>

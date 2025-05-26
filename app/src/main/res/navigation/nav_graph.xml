@@ -42,15 +42,19 @@
 
     <action
         android:id="@+id/action_global_all_pets"
-        app:destination="@id/nav_pet"/>
+        app:destination="@id/nav_all_pets"/>
+
+    <include app:graph="@navigation/all_pets_nav_graph" />
 
     <action
         android:id="@+id/action_global_add_pet"
-        app:destination="@id/destination_add_pet"/>
+        app:destination="@id/nav_add_pet"/>
+
+    <include app:graph="@navigation/add_pet_nav_graph" />
 
     <action
         android:id="@+id/action_global_pet_details"
-        app:destination="@id/destination_pet_details"/>
+        app:destination="@id/nav_pet_details"/>
 
-    <include app:graph="@navigation/pet_nav_graph" />
+    <include app:graph="@navigation/pet_details_nav_graph" />
 </navigation>

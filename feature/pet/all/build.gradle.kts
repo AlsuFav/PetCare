@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
     id ("com.google.dagger.hilt.android")
@@ -7,17 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "ru.fav.petcare.app"
-    compileSdk = 35
+    namespace = "ru.fav.petcare.pet.all"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "ru.fav.petcare"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = rootProject.extra.get("versionCode") as Int
-        versionName = rootProject.extra.get("versionName") as String
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -42,28 +39,22 @@ android {
 }
 
 dependencies {
-    implementation(project(path = ":core:presentation"))
-    implementation(project(path = ":core:data"))
-    implementation(project(path = ":core:domain"))
-    implementation(project(path = ":core:navigation"))
-    implementation(project(path = ":core:network"))
-    implementation(project(path = ":core:util"))
 
-    implementation(project(path = ":feature:splash"))
-    implementation(project(path = ":feature:authorization"))
-    implementation(project(path = ":feature:registration"))
-    implementation(project(path = ":feature:home"))
-    implementation(project(path = ":feature:profile"))
-    implementation(project(path = ":feature:safety"))
-    implementation(project(path = ":feature:pet:all"))
-    implementation(project(path = ":feature:pet:details"))
-    implementation(project(path = ":feature:pet:add"))
+    implementation(project(path = ":core:presentation"))
+    implementation(project(path = ":core:domain"))
+    implementation(project(path = ":core:util"))
+    implementation(project(path = ":core:navigation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.fragment)
+    implementation(libs.androidx.constraintlayout)
+
+    implementation(libs.shimmer)
+    implementation(libs.glide)
+
     implementation(libs.lifecycle.viewmodel)
 
     implementation(libs.androidx.navigation.fragment)

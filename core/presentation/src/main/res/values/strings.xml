@@ -16,6 +16,15 @@
     <string name="first_name">Имя</string>
     <string name="password">Пароль</string>
 
+    <string name="cat">Кошка</string>
+    <string name="dog">Собака</string>
+
+    <string name="pet_photo">Фотография питомца</string>
+    <string name="pet_name">Имя питомца</string>
+    <string name="species">Вид</string>
+    <string name="breed">Порода</string>
+    <string name="birth_date">Дата рождения</string>
+
     <string name="safety">Безопасность</string>
 
     <string name="error_title">Ошибка</string>
