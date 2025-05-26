@@ -1,6 +1,7 @@
 package ru.fav.petcare.pet.add
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -170,7 +171,9 @@ class AddPetFragment: Fragment(R.layout.fragment_add_pet) {
         ).apply {
             datePicker.maxDate = maxDateMillis
             datePicker.minDate = minDateMillis
-            datePicker
+            setButton(DialogInterface.BUTTON_NEGATIVE, getString(ru.fav.petcare.presentation.R.string.cancel)) { _, _ ->
+                dismiss()
+            }
             show()
         }
     }
