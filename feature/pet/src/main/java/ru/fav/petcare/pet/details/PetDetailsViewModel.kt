@@ -137,8 +137,9 @@ class PetDetailsViewModel @Inject constructor(
             }.fold(
                 onSuccess = {
                     _updatePetState.value = UpdatePetState.Success
-                    _effect.emit(PetDetailsEffect.ShowToast(
-                        resourceProvider.getString(ru.fav.petcare.pet.R.string.pet_data_updated_successfully))
+                    _effect.emit(
+                        ShowToast(
+                            resourceProvider.getString(ru.fav.petcare.pet.R.string.pet_data_updated_successfully))
                     )
                 },
                 onFailure = { e ->

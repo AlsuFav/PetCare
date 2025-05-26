@@ -9,10 +9,10 @@ class PetMapper @Inject constructor(){
         return input?.let {
             PetModel(
                 id = it.id ?: 0,
-                name = it.name ?: "",
-                species = it.species ?: "",
-                breed = it.breed ?: "",
-                birthDate = it.birthDate ?: "",
+                name = it.name.orEmpty(),
+                species = it.species.orEmpty(),
+                breed = it.breed.orEmpty(),
+                birthDate = it.birthDate.orEmpty(),
                 )
         } ?: PetModel()
     }

@@ -139,7 +139,7 @@ class AddPetViewModel @Inject constructor(
             name.isEmpty() || species.isEmpty() || birthDate.isEmpty()
                     || (species == dog && breed.isNullOrEmpty())
             -> resourceProvider.getString(R.string.error_fill_all_fields)
-            species == dog && !_breedsState.value.breeds.any { it.equals(breed, ignoreCase = true) } ->
+            species == dog && !breedsState.value.breeds.any { it.equals(breed, ignoreCase = true) } ->
                 resourceProvider.getString(ru.fav.petcare.pet.R.string.error_invalid_breed)
             else -> null
         }
