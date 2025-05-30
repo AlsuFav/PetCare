@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.fav.petcare.domain.exception.NoJwtException
 import ru.fav.petcare.domain.provider.ResourceProvider
-import ru.fav.petcare.domain.usecase.GetJwtUseCase
+import ru.fav.petcare.domain.usecase.jwt.GetJwtUseCase
 import ru.fav.petcare.navigation.NavMain
 import ru.fav.petcare.presentation.R
 import ru.fav.petcare.splash.ui.state.SplashEvent

@@ -1,0 +1,4 @@
+<resources>
+    <string name="select_pet">Выберите питомца</string>
+    <string name="add_pet">Добавить питомца</string>
+</resources>

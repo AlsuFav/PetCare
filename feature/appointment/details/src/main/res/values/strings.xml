@@ -1,0 +1,10 @@
+<resources>
+    <string name="appointment_date_01_01_2025_12_00">01.01.2001 12:00</string>
+    <string name="appointment_details">Детали записи</string>
+
+    <string name="cancel_appointment">Отменить запись</string>
+
+    <string name="confirm_cancel_appointment_message">Вы уверены, что хотите отменить запись?</string>
+
+    <string name="appointment_cancelled_successfully">Запись отменена</string>
+</resources>

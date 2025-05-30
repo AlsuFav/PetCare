@@ -1,5 +1,6 @@
 package ru.fav.petcare.navigation
 
+import android.os.Bundle
 import ru.fav.petcare.app.R
 import javax.inject.Inject
 
@@ -39,5 +40,78 @@ class NavMainImpl @Inject constructor(
 
     override fun goToSafetyPage() {
         navigatorDelegate.navigate(action = R.id.action_global_safety)
+    }
+
+    override fun goToAllPetsPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_all_pets)
+    }
+
+    override fun goToAddPetPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_add_pet)
+    }
+
+    override fun goToPetDetailsPage(id: Long) {
+        val args = Bundle().apply {
+            putLong("id", id)
+        }
+        navigatorDelegate.navigate(
+            action = R.id.action_global_pet_details,
+            args = args
+        )
+    }
+
+    override fun goToAllAppointmentsPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_all_appointments)
+    }
+
+    override fun goToSelectPetPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_select_pet)
+    }
+
+    override fun goToSelectServicePage(petId: Long) {
+        val args = Bundle().apply {
+            putLong("petId", petId)
+        }
+        navigatorDelegate.navigate(
+            action = R.id.action_global_select_service,
+            args = args
+        )
+    }
+
+    override fun goToSelectTimeslotPage(petId: Long, serviceId: Long) {
+        val args = Bundle().apply {
+            putLong("petId", petId)
+            putLong("serviceId", serviceId)
+        }
+        navigatorDelegate.navigate(
+            action = R.id.action_global_select_timeslot,
+            args = args
+        )
+    }
+
+    override fun goToConfirmAppointmentPage(
+        petId: Long,
+        serviceId: Long,
+        timeSlotId: Long
+    ) {
+        val args = Bundle().apply {
+            putLong("petId", petId)
+            putLong("serviceId", serviceId)
+            putLong("timeSlotId", timeSlotId)
+        }
+        navigatorDelegate.navigate(
+            action = R.id.action_global_confirm_appointment,
+            args = args
+        )
+    }
+
+    override fun goToAppointmentDetailsPage(id: Long) {
+        val args = Bundle().apply {
+            putLong("id", id)
+        }
+        navigatorDelegate.navigate(
+            action = R.id.action_global_appointment_details,
+            args = args
+        )
     }
 }

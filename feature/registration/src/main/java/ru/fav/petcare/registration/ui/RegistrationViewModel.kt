@@ -1,6 +1,5 @@
 package ru.fav.petcare.registration.ui
 
-import android.provider.Settings.Global.getString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,8 +10,8 @@ import ru.fav.petcare.domain.exception.ClientAlreadyExistsException
 import ru.fav.petcare.domain.exception.NetworkException
 import ru.fav.petcare.domain.exception.ServerException
 import ru.fav.petcare.domain.provider.ResourceProvider
-import ru.fav.petcare.domain.usecase.RegisterClientUseCase
-import ru.fav.petcare.domain.usecase.SaveJwtUseCase
+import ru.fav.petcare.domain.usecase.client.RegisterClientUseCase
+import ru.fav.petcare.domain.usecase.jwt.SaveJwtUseCase
 import ru.fav.petcare.navigation.NavMain
 import ru.fav.petcare.presentation.R
 import ru.fav.petcare.presentation.util.validators.PhoneValidator

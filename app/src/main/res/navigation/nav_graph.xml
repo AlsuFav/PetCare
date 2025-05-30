@@ -39,4 +39,58 @@
         app:destination="@id/nav_safety"/>
 
     <include app:graph="@navigation/safety_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_all_pets"
+        app:destination="@id/nav_all_pets"/>
+
+    <include app:graph="@navigation/all_pets_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_add_pet"
+        app:destination="@id/nav_add_pet"/>
+
+    <include app:graph="@navigation/add_pet_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_pet_details"
+        app:destination="@id/nav_pet_details"/>
+
+    <include app:graph="@navigation/pet_details_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_all_appointments"
+        app:destination="@id/nav_all_appointments"/>
+
+    <include app:graph="@navigation/all_appointments_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_select_pet"
+        app:destination="@id/nav_select_pet"/>
+
+    <include app:graph="@navigation/select_pet_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_select_service"
+        app:destination="@id/nav_select_service"/>
+
+    <include app:graph="@navigation/select_service_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_select_timeslot"
+        app:destination="@id/nav_select_timeslot"/>
+
+    <include app:graph="@navigation/select_timeslot_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_confirm_appointment"
+        app:destination="@id/nav_confirm_appointment"/>
+
+    <include app:graph="@navigation/confirm_appointment_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_appointment_details"
+        app:destination="@id/nav_appointment_details"/>
+
+    <include app:graph="@navigation/appointment_details_nav_graph" />
 </navigation>

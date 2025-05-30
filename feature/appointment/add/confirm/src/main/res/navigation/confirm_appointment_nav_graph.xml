@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_confirm_appointment"
+    app:startDestination="@id/destination_confirm_appointment">
+
+    <fragment
+        android:id="@+id/destination_confirm_appointment"
+        android:name="ru.fav.petcare.appointment.add.confirm.ui.ConfirmAppointmentFragment"
+        android:label="Add Appointment">
+
+        <argument
+            android:name="petId"
+            app:argType="long"/>
+
+        <argument
+            android:name="serviceId"
+            app:argType="long"/>
+
+        <argument
+            android:name="timeSlotId"
+            app:argType="long"/>
+    </fragment>
+</navigation>

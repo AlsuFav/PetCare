@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="add_pet">Добавить питомца</string>
+
+    <string name="pet_created_successfully">Питомец добавлен</string>
+
+    <string name="error_invalid_breed">Пожалуйста, выберите породу из списка</string>
+</resources>

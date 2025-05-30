@@ -7,6 +7,6 @@
     <fragment
         android:id="@+id/destination_home"
         android:name="ru.fav.petcare.home.ui.HomeFragment"
-        android:label="Authorization">
+        android:label="Home">
     </fragment>
 </navigation>

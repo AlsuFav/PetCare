@@ -1,0 +1,4 @@
+<resources>
+    <string name="confirm_appointment">Подтвердить запись</string>
+    <string name="appointment_created_successfully">Запись создана</string>
+</resources>

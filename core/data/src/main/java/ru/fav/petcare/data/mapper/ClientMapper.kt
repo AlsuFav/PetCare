@@ -8,9 +8,9 @@ class ClientMapper @Inject constructor(){
     fun map(input: ClientDataResponse?): ClientModel {
         return input?.let {
             ClientModel(
-                firstName = it.firstName ?: "",
-                lastName = it.lastName ?: "",
-                phone = it.phone ?: "",
+                firstName = it.firstName.orEmpty(),
+                lastName = it.lastName.orEmpty(),
+                phone = it.phone.orEmpty(),
                 )
         } ?: ClientModel()
     }

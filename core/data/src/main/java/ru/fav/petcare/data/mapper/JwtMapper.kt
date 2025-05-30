@@ -7,7 +7,7 @@ import javax.inject.Inject
 class JwtMapper @Inject constructor(){
     fun map(input: JwtResponse?): JwtModel {
         return input?.let {
-            JwtModel(token = it.token ?: "")
+            JwtModel(token = it.token.orEmpty())
         } ?: JwtModel()
     }
 }

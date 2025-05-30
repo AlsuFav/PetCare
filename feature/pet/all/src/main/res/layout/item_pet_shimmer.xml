@@ -1,0 +1,47 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <View
+            android:id="@+id/ShimmerPetPhoto"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/shimmer_bg"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            android:id="@+id/shimmerPetName"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:background="@drawable/shimmer_bg"
+            app:layout_constraintStart_toEndOf="@id/ShimmerPetPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ShimmerPetPhoto"
+            android:layout_marginStart="16dp"/>
+
+        <View
+            android:id="@+id/shimmerBirthDate"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:background="@drawable/shimmer_bg"
+            app:layout_constraintStart_toEndOf="@id/ShimmerPetPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shimmerPetName"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
