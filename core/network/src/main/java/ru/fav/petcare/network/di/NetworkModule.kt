@@ -8,11 +8,14 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.fav.petcare.network.AppointmentApi
 import ru.fav.petcare.network.BuildConfig.PETCARE_BASE_URL
 import ru.fav.petcare.network.AuthApi
 import ru.fav.petcare.network.BreedApi
 import ru.fav.petcare.network.ClientApi
 import ru.fav.petcare.network.PetApi
+import ru.fav.petcare.network.ServiceApi
+import ru.fav.petcare.network.TimeSlotApi
 import ru.fav.petcare.network.interceptor.JwtInterceptor
 import javax.inject.Singleton
 
@@ -98,5 +101,50 @@ class NetworkModule {
             .build()
 
         return retrofit.create(BreedApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppointmentApi(
+        okHttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory,
+    ): AppointmentApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(PETCARE_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+
+        return retrofit.create(AppointmentApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideServiceApi(
+        okHttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory,
+    ): ServiceApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(PETCARE_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+
+        return retrofit.create(ServiceApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTimeSlotApi(
+        okHttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory,
+    ): TimeSlotApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(PETCARE_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+
+        return retrofit.create(TimeSlotApi::class.java)
     }
 }

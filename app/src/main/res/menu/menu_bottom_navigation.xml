@@ -8,13 +8,13 @@
         android:title="@string/home"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_appointments_tab"
+        android:id="@+id/nav_all_appointments"
         android:orderInCategory="2"
         android:icon="@drawable/ic_calendar"
         android:title="@string/appointments"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/nav_pet"
+        android:id="@+id/nav_all_pets"
         android:orderInCategory="3"
         android:icon="@drawable/ic_paw"
         android:title="@string/pets"

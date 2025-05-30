@@ -19,7 +19,7 @@ import ru.fav.petcare.navigation.NavMain
 import ru.fav.petcare.pet.all.ui.state.AllPetsEffect
 import ru.fav.petcare.pet.all.ui.state.AllPetsEvent
 import ru.fav.petcare.pet.all.ui.state.AllPetsState
-import ru.fav.petcare.pet.all.R
+import ru.fav.petcare.presentation.R
 import javax.inject.Inject
 
 @HiltViewModel
@@ -76,17 +76,17 @@ class AllPetsViewModel @Inject constructor(
             }
             is NetworkException -> {
                 _allPetsState.value = AllPetsState.Error.GlobalError
-                resourceProvider.getString(ru.fav.petcare.presentation.R.string.error_network)
+                resourceProvider.getString(R.string.error_network)
             }
             is ServerException -> {
                 _allPetsState.value = AllPetsState.Error.GlobalError
                 throwable.message ?: resourceProvider
-                    .getString(ru.fav.petcare.presentation.R.string.error_server)
+                    .getString(R.string.error_server)
             }
             else -> {
                 _allPetsState.value = AllPetsState.Error.GlobalError
                 resourceProvider
-                    .getString(ru.fav.petcare.presentation.R.string.error_unknown)
+                    .getString(R.string.error_unknown)
             }
         }
         if (message != null) {

@@ -2,8 +2,8 @@
     <string name="cat">Кошка</string>
     <string name="dog">Собака</string>
 
+    <string name="pet_list">Список питомцев</string>
     <string name="birth_date_01_01_2025">01.01.2025</string>
     <string name="add_pet">Добавить питомца</string>
-    <string name="no_pets">Список питомцев пуст. Добавьте питомца</string>
 
 </resources>

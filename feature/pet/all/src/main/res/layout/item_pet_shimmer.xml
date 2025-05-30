@@ -32,8 +32,8 @@
             app:layout_constraintTop_toTopOf="@id/ShimmerPetPhoto"
             android:layout_marginStart="16dp"/>
 
-        <TextView
-            android:id="@+id/textViewBirthDate"
+        <View
+            android:id="@+id/shimmerBirthDate"
             android:layout_width="0dp"
             android:layout_height="22dp"
             android:background="@drawable/shimmer_bg"

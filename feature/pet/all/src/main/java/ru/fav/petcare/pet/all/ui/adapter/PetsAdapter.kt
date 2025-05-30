@@ -11,7 +11,7 @@ import ru.fav.petcare.pet.all.databinding.ItemPetBinding
 import ru.fav.petcare.presentation.R
 
 class PetsAdapter (
-    private val onNasaImageClick: (PetModel) -> Unit
+    private val onPetClick: (PetModel) -> Unit
 ) : RecyclerView.Adapter<PetsAdapter.PetViewHolder>() {
 
     private var pets = mutableListOf<PetModel>()
@@ -51,7 +51,7 @@ class PetsAdapter (
             }
 
             itemView.setOnClickListener {
-                onNasaImageClick(pet)
+                onPetClick(pet)
             }
         }
     }

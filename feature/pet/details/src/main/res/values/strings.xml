@@ -1,7 +1,7 @@
 <resources>
 
     <string name="choose_photo">Выбрать фотографию</string>
-    <string name="deletePet">Удалить питомца</string>
+    <string name="delete_pet">Удалить питомца</string>
 
     <string name="pet_data_updated_successfully">Данные питомца обновлены</string>
 

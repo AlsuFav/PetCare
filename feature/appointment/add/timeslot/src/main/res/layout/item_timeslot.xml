@@ -1,0 +1,29 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/textViewTime"
+            android:text="@string/time_12_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/textViewGroomer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/groomer_name"
+            android:textSize="14sp"
+            android:textColor="@color/gray_medium"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

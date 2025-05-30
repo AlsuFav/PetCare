@@ -13,6 +13,7 @@ class PetMapper @Inject constructor(){
                 species = it.species.orEmpty(),
                 breed = it.breed.orEmpty(),
                 birthDate = it.birthDate.orEmpty(),
+                imagePath = it.imagePath.orEmpty()
                 )
         } ?: PetModel()
     }

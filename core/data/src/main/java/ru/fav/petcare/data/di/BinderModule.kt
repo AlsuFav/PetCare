@@ -7,19 +7,25 @@ import dagger.hilt.components.SingletonComponent
 import ru.fav.petcare.data.provider.AndroidResourceProvider
 import ru.fav.petcare.data.provider.DateProviderImpl
 import ru.fav.petcare.data.provider.JwtProviderImpl
+import ru.fav.petcare.data.repository.AppointmentRepositoryImpl
 import ru.fav.petcare.data.repository.AuthRepositoryImpl
 import ru.fav.petcare.data.repository.BreedRepositoryImpl
 import ru.fav.petcare.data.repository.ClientRepositoryImpl
 import ru.fav.petcare.data.repository.JwtRepositoryImpl
 import ru.fav.petcare.data.repository.PetRepositoryImpl
+import ru.fav.petcare.data.repository.ServiceRepositoryImpl
+import ru.fav.petcare.data.repository.TimeSlotRepositoryImpl
 import ru.fav.petcare.domain.repository.BreedRepository
 import ru.fav.petcare.domain.provider.DateProvider
 import ru.fav.petcare.domain.provider.JwtProvider
 import ru.fav.petcare.domain.provider.ResourceProvider
+import ru.fav.petcare.domain.repository.AppointmentRepository
 import ru.fav.petcare.domain.repository.AuthRepository
 import ru.fav.petcare.domain.repository.ClientRepository
 import ru.fav.petcare.domain.repository.JwtRepository
 import ru.fav.petcare.domain.repository.PetRepository
+import ru.fav.petcare.domain.repository.ServiceRepository
+import ru.fav.petcare.domain.repository.TimeSlotRepository
 import javax.inject.Singleton
 
 @Module
@@ -40,7 +46,19 @@ interface BinderModule {
 
     @Binds
     @Singleton
+    fun bindAppointmentRepositoryToImpl(impl: AppointmentRepositoryImpl): AppointmentRepository
+
+    @Binds
+    @Singleton
     fun bindBreedRepositoryToImpl(impl: BreedRepositoryImpl): BreedRepository
+
+    @Binds
+    @Singleton
+    fun bindServiceRepositoryToImpl(impl: ServiceRepositoryImpl): ServiceRepository
+
+    @Binds
+    @Singleton
+    fun bindTimeSlotRepositoryToImpl(impl: TimeSlotRepositoryImpl): TimeSlotRepository
 
     @Binds
     @Singleton

@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="?attr/colorPrimary" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewPetPhoto"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -200,7 +200,7 @@
             android:id="@+id/buttonDeletePet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/deletePet"
+            android:text="@string/delete_pet"
             android:textColor="?attr/colorOnSecondaryContainer"
             android:backgroundTint="?attr/colorSecondaryContainer"
             app:layout_constraintStart_toStartOf="parent"

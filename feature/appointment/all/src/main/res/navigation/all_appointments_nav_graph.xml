@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_all_appointments"
+    app:startDestination="@id/destination_all_appointments">
+
+    <fragment
+        android:id="@+id/destination_all_appointments"
+        android:name="ru.fav.petcare.appointment.all.ui.AllAppointmentsFragment"
+        android:label="All Appointments">
+    </fragment>
+</navigation>

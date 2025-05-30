@@ -1,0 +1,10 @@
+<resources>
+    <string name="appointment_image">Изображение каллендаря</string>
+    <string name="appointment_date_01_01_2025_12_00">01.01.2001 12:00</string>
+    <string name="upcoming_appointment_list">Список предстоящих записей</string>
+    <string name="passed_appointment_list">Список прошедших записей</string>
+    <string name="add_appointment">Создать запись</string>
+    <string name="passed_appointments">Прошедшие записи</string>
+    <string name="upcoming_appointments">Предстоящие записи</string>
+    <string name="no_appointments">Список записей пуст</string>
+</resources>

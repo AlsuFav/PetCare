@@ -58,6 +58,12 @@ dependencies {
     implementation(project(path = ":feature:pet:all"))
     implementation(project(path = ":feature:pet:details"))
     implementation(project(path = ":feature:pet:add"))
+    implementation(project(path = ":feature:appointment:all"))
+    implementation(project(path = ":feature:appointment:add:pet"))
+    implementation(project(path = ":feature:appointment:add:service"))
+    implementation(project(path = ":feature:appointment:add:timeslot"))
+    implementation(project(path = ":feature:appointment:add:confirm"))
+    implementation(project(path = ":feature:appointment:details"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

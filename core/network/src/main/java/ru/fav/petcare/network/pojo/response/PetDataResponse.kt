@@ -13,4 +13,6 @@ class PetDataResponse (
     val breed: String? = null,
     @SerializedName("birthDate")
     val birthDate: String? = null,
+    @SerializedName("imagePath")
+    val imagePath: String? = null,
 )
