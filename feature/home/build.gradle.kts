@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
 
+    implementation(libs.yandex.maps.mobile)
+
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
     implementation(libs.viewbinding.property.delegate)

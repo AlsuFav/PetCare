@@ -28,7 +28,7 @@ class ServicesAdapter (
 
         fun bind(service: ServiceModel) {
             binding.textViewServiceName.text = service.name
-            binding.textViewPrice.text = service.price.toString()
+            binding.textViewPrice.text = service.prices.first().price.toString()
 
             itemView.setOnClickListener {
                 onServiceClick(service)

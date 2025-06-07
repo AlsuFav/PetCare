@@ -3,6 +3,7 @@ package ru.fav.petcare.pet.all.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -49,7 +50,7 @@ class AllPetsViewModel @Inject constructor(
 
         viewModelScope.launch {
             runCatching {
-//                delay(2000)
+                delay(1000)
                 getAllPetsDataUseCase()
             }.fold(
                 onSuccess = {

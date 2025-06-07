@@ -18,7 +18,7 @@ import ru.fav.petcare.domain.exception.NoServicesException
 import ru.fav.petcare.domain.exception.ServerException
 import ru.fav.petcare.domain.exception.UnauthorizedException
 import ru.fav.petcare.domain.provider.ResourceProvider
-import ru.fav.petcare.domain.usecase.appointment.GetAllServicesDataForPetUseCase
+import ru.fav.petcare.domain.usecase.service.GetAllServicesDataForPetUseCase
 import ru.fav.petcare.domain.usecase.jwt.ClearJwtUseCase
 import ru.fav.petcare.navigation.NavMain
 import javax.inject.Inject

@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation(project(path = ":core:database"))
     implementation(project(path = ":core:network"))
     implementation(project(path = ":core:domain"))
 

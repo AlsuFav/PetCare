@@ -12,7 +12,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewAppointment"
-            android:layout_width="80dp"
+            android:layout_width="72dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_calendar"

@@ -1,4 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    dependencies {
+        classpath(libs.gradle.secrets)
+    }
+}
+
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
@@ -8,6 +15,8 @@ plugins {
     id ("com.google.dagger.hilt.android") version "2.56" apply false
     id ("androidx.navigation.safeargs.kotlin") version "2.7.7" apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.crashlytics) apply false
 }
 
 private val versionMajor = 1

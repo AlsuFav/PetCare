@@ -34,6 +34,10 @@ class NavMainImpl @Inject constructor(
         navigatorDelegate.navigate(action = R.id.action_global_home)
     }
 
+    override fun goToServicesPage() {
+        navigatorDelegate.navigate(action = R.id.action_global_services)
+    }
+
     override fun goToProfilePage() {
         navigatorDelegate.navigate(action = R.id.action_global_profile)
     }

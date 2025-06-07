@@ -1,6 +1,7 @@
-package ru.fav.petcare.data.di
+package ru.fav.petcare.database.di
 
 import android.content.Context
+import androidx.room.Room
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
@@ -10,11 +11,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ru.fav.petcare.database.AppDatabase
+import ru.fav.petcare.database.dao.ClientDao
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataModule {
+class DatabaseModule {
+    private val databaseName = "app_database"
 
     @Provides
     @Singleton
@@ -24,5 +28,20 @@ class DataModule {
                 context.preferencesDataStoreFile("app_preferences")
             }
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            databaseName
+        ).build()
+    }
+
+    @Provides
+    fun provideClientDao(appDatabase: AppDatabase): ClientDao {
+        return appDatabase.clientDao()
     }
 }

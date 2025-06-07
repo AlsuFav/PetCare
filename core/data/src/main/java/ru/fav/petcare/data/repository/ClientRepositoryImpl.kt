@@ -4,6 +4,7 @@ import retrofit2.HttpException
 import ru.fav.petcare.data.mapper.ClientMapper
 import ru.fav.petcare.data.util.ErrorParser.parseProblemDetails
 import ru.fav.petcare.data.util.HttpStatusCodes
+import ru.fav.petcare.database.dao.ClientDao
 import ru.fav.petcare.domain.exception.ClientAlreadyExistsException
 import ru.fav.petcare.domain.exception.InvalidPasswordException
 import ru.fav.petcare.domain.exception.NetworkException
@@ -21,15 +22,24 @@ import javax.inject.Inject
 
 class ClientRepositoryImpl @Inject constructor(
     private val clientApi: ClientApi,
+    private val clientDao: ClientDao,
     private val mapper: ClientMapper
 ) : ClientRepository {
 
     override suspend fun getClientData(): ClientModel {
         return try {
             val response = clientApi.getClientData()
-            mapper.map(response)
+            val client = mapper.map(response)
+            clientDao.deleteClient()
+            clientDao.saveClient(mapper.mapToEntity(client))
+            client
         } catch (_: IOException) {
-            throw NetworkException(null)
+            val client = clientDao.getClient()
+            if (client != null) {
+                return mapper.mapFromEntity(client)
+            } else {
+                throw NetworkException(null)
+            }
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val problemDetails = parseProblemDetails(errorBody)
@@ -79,6 +89,12 @@ class ClientRepositoryImpl @Inject constructor(
                 lastName = lastName,
                 phone = phone
             ))
+            clientDao.deleteClient()
+            clientDao.saveClient(mapper.mapToEntity(ClientModel(
+                firstName = firstName,
+                lastName = lastName,
+                phone = phone
+            )))
         } catch (_: IOException) {
             throw NetworkException(null)
         } catch (e: HttpException) {
@@ -97,6 +113,7 @@ class ClientRepositoryImpl @Inject constructor(
     override suspend fun deleteClient() {
         try {
             clientApi.deleteClient()
+            clientDao.deleteClient()
         } catch (_: IOException) {
             throw NetworkException(null)
         } catch (e: HttpException) {

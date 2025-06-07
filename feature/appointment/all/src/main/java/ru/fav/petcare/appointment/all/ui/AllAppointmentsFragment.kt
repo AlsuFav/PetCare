@@ -101,8 +101,8 @@ class AllAppointmentsFragment: Fragment(R.layout.fragment_all_appointments) {
             buttonUpcomingAppointment.isVisible = !upcoming
             buttonPassedAppointment.isVisible = upcoming
 
-            textViewAppointmentList.text.apply {
-                if (upcoming) {
+            textViewAppointmentList.apply {
+                text = if (upcoming) {
                     getString(R.string.upcoming_appointment_list)
                 } else {
                     getString(R.string.passed_appointment_list)

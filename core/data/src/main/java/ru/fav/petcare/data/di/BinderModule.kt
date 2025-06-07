@@ -11,6 +11,7 @@ import ru.fav.petcare.data.repository.AppointmentRepositoryImpl
 import ru.fav.petcare.data.repository.AuthRepositoryImpl
 import ru.fav.petcare.data.repository.BreedRepositoryImpl
 import ru.fav.petcare.data.repository.ClientRepositoryImpl
+import ru.fav.petcare.data.repository.CommonRepositoryImpl
 import ru.fav.petcare.data.repository.JwtRepositoryImpl
 import ru.fav.petcare.data.repository.PetRepositoryImpl
 import ru.fav.petcare.data.repository.ServiceRepositoryImpl
@@ -22,6 +23,7 @@ import ru.fav.petcare.domain.provider.ResourceProvider
 import ru.fav.petcare.domain.repository.AppointmentRepository
 import ru.fav.petcare.domain.repository.AuthRepository
 import ru.fav.petcare.domain.repository.ClientRepository
+import ru.fav.petcare.domain.repository.CommonRepository
 import ru.fav.petcare.domain.repository.JwtRepository
 import ru.fav.petcare.domain.repository.PetRepository
 import ru.fav.petcare.domain.repository.ServiceRepository
@@ -55,6 +57,11 @@ interface BinderModule {
     @Binds
     @Singleton
     fun bindServiceRepositoryToImpl(impl: ServiceRepositoryImpl): ServiceRepository
+
+    @Binds
+    @Singleton
+    fun bindCommonRepositoryToImpl(impl: CommonRepositoryImpl): CommonRepository
+
 
     @Binds
     @Singleton
