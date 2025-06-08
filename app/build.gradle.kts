@@ -50,6 +50,7 @@ dependencies {
     implementation(project(path = ":core:data"))
     implementation(project(path = ":core:domain"))
     implementation(project(path = ":core:navigation"))
+    implementation(project(path = ":core:notification"))
     implementation(project(path = ":core:network"))
     implementation(project(path = ":core:util"))
 

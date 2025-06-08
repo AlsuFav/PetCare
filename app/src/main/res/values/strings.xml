@@ -1,0 +1,7 @@
+<resources>
+    <string name="default_notification_channel_id">default channel</string>
+    <string name="default_importance">Default importance</string>
+    <string name="high_importance">High importance</string>
+    <string name="default_notification_title">Default notification title</string>
+    <string name="default_notification_message">Default notification message</string>
+</resources>
