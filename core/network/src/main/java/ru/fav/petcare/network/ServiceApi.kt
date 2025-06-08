@@ -9,4 +9,7 @@ interface ServiceApi {
     suspend fun getAllServicesDataForPet(
         @Path("id") id: Long,
         ): List<ServiceDataResponse>?
+
+    @GET("services")
+    suspend fun getAllServicesData(): List<ServiceDataResponse>?
 }

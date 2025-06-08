@@ -9,6 +9,15 @@ class ServiceDataResponse (
     val name: String? = null,
     @SerializedName("description")
     val description: String? = null,
+    @SerializedName("prices")
+    val prices: List<ServicePriceDataResponse>? = null,
+)
+
+class ServicePriceDataResponse (
+    @SerializedName("species")
+    val species: String? = null,
+    @SerializedName("breedType")
+    val breedType: String? = null,
     @SerializedName("price")
     val price: Int? = null,
 )

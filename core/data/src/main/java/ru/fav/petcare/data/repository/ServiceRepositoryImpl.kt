@@ -37,4 +37,21 @@ class ServiceRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun getAllServicesData(): List<ServiceModel> {
+        return try {
+            val response = serviceApi.getAllServicesData()
+            mapper.mapList(response)
+        } catch (_: IOException) {
+            throw NetworkException(null)
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val problemDetails = parseProblemDetails(errorBody)
+
+            when (e.code()) {
+                HttpStatusCodes.UNAUTHORIZED -> throw UnauthorizedException(problemDetails?.detail)
+                else -> throw ServerException(problemDetails?.detail)
+            }
+        }
+    }
 }

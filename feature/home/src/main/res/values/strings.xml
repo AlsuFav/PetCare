@@ -1,2 +1,7 @@
 <resources>
+    <string name="address">Адрес</string>
+    <string name="question">Вопрос</string>
+    <string name="faq_title">Часто задаваемые вопросы</string>
+    <string name="answer">Услуга занимает от 1,5 до 2 часов в зависимости от вида услуги, породы и состояния шерсти.</string>
+    <string name="services_list">Список услуг с ценами</string>
 </resources>

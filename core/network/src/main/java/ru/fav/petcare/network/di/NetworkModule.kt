@@ -13,6 +13,7 @@ import ru.fav.petcare.network.BuildConfig.PETCARE_BASE_URL
 import ru.fav.petcare.network.AuthApi
 import ru.fav.petcare.network.BreedApi
 import ru.fav.petcare.network.ClientApi
+import ru.fav.petcare.network.CommonApi
 import ru.fav.petcare.network.PetApi
 import ru.fav.petcare.network.ServiceApi
 import ru.fav.petcare.network.TimeSlotApi
@@ -146,5 +147,20 @@ class NetworkModule {
             .build()
 
         return retrofit.create(TimeSlotApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCommonApi(
+        okHttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory,
+    ): CommonApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(PETCARE_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+
+        return retrofit.create(CommonApi::class.java)
     }
 }

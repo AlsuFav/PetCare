@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "504301949676",
+    "project_id": "petcare-259ae",
+    "storage_bucket": "petcare-259ae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504301949676:android:b96608d23665ebf83c4bc9",
+        "android_client_info": {
+          "package_name": "ru.fav.petcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6H3zGGOEv-sgB07vBRlLW3iv4Ms2HYuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="service_price_species_only_format">%1$s:</string>
+    <string name="service_price_species_breed_format">%1$s (%2$s):</string>
+    <string name="prices">Цены:</string>
+</resources>

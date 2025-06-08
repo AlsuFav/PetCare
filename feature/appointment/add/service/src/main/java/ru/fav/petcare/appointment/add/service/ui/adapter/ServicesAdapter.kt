@@ -2,8 +2,11 @@ package ru.fav.petcare.appointment.add.service.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.fav.petcare.appointment.add.service.databinding.ItemSelectServiceBinding
+import ru.fav.petcare.appointment.add.service.ui.util.ServiceDiffUtil
+import ru.fav.petcare.domain.model.AppointmentModel
 import ru.fav.petcare.domain.model.ServiceModel
 
 class ServicesAdapter (
@@ -26,19 +29,26 @@ class ServicesAdapter (
     inner class ServiceViewHolder(private val binding: ItemSelectServiceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(service: ServiceModel) {
-            binding.textViewServiceName.text = service.name
-            binding.textViewPrice.text = service.price.toString()
+        private var currentService: ServiceModel? = null
 
-            itemView.setOnClickListener {
-                onServiceClick(service)
+        init {
+            binding.root.setOnClickListener {
+                currentService?.let { onServiceClick(it) }
             }
+        }
+
+        fun bind(service: ServiceModel) {
+            currentService = service
+            binding.textViewServiceName.text = service.name
+            binding.textViewPrice.text = service.prices.first().price.toString()
         }
     }
 
     fun updateData(list: MutableList<ServiceModel>) {
+        val diff = ServiceDiffUtil(oldList = services, newList = list)
+        val diffResult = DiffUtil.calculateDiff(diff)
         services.clear()
         services.addAll(list)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 }

@@ -10,8 +10,7 @@ import ru.fav.petcare.domain.exception.ClientAlreadyExistsException
 import ru.fav.petcare.domain.exception.NetworkException
 import ru.fav.petcare.domain.exception.ServerException
 import ru.fav.petcare.domain.provider.ResourceProvider
-import ru.fav.petcare.domain.usecase.client.RegisterClientUseCase
-import ru.fav.petcare.domain.usecase.jwt.SaveJwtUseCase
+import ru.fav.petcare.domain.usecase.auth.RegisterClientUseCase
 import ru.fav.petcare.navigation.NavMain
 import ru.fav.petcare.presentation.R
 import ru.fav.petcare.presentation.util.validators.PhoneValidator
@@ -22,7 +21,6 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val registerClientUseCase: RegisterClientUseCase,
-    private val saveJwtUseCase: SaveJwtUseCase,
     private val resourceProvider: ResourceProvider,
     private val navMain: NavMain,
 ): ViewModel() {
@@ -64,14 +62,13 @@ class RegistrationViewModel @Inject constructor(
 
         viewModelScope.launch {
             runCatching {
-                val jwt = registerClientUseCase(
+                registerClientUseCase(
                     firstName = firstName,
                     lastName = lastName,
                     phone = phone,
                     password = password,
                     confirmPassword = confirmPassword
                 )
-                saveJwtUseCase(jwt)
             }.fold(
                 onSuccess = {
                     _registrationState.value = RegistrationState.Success

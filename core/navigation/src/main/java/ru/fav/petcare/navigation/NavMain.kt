@@ -14,6 +14,8 @@ interface NavMain {
 
     fun goToHomePage()
 
+    fun goToServicesPage()
+
     fun goToProfilePage()
 
     fun goToSafetyPage()

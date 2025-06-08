@@ -1,14 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
-    id ("com.google.dagger.hilt.android")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.safe.args)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.crashlytics)
+    alias(libs.plugins.gradle.secrets)
 }
 
 android {
     namespace = "ru.fav.petcare.app"
-    compileSdk = 35
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "ru.fav.petcare"
@@ -38,6 +41,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -53,6 +57,7 @@ dependencies {
     implementation(project(path = ":feature:authorization"))
     implementation(project(path = ":feature:registration"))
     implementation(project(path = ":feature:home"))
+    implementation(project(path = ":feature:service"))
     implementation(project(path = ":feature:profile"))
     implementation(project(path = ":feature:safety"))
     implementation(project(path = ":feature:pet:all"))
@@ -78,4 +83,11 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
     implementation(libs.viewbinding.property.delegate)
+    implementation(libs.yandex.maps.mobile)
+
+    // Firebase
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.remote.config)
 }

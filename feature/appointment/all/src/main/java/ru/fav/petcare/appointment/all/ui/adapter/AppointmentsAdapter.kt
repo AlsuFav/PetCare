@@ -15,6 +15,7 @@ class AppointmentsAdapter(
 
     private var appointments = mutableListOf<AppointmentModel>()
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppointmentViewHolder {
         val binding = ItemAppointmentBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -33,13 +34,18 @@ class AppointmentsAdapter(
     inner class AppointmentViewHolder(private val binding: ItemAppointmentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private var currentAppointment: AppointmentModel? = null
+
+        init {
+            binding.root.setOnClickListener {
+                currentAppointment?.let { onAppointmentClick(it) }
+            }
+        }
+
         fun bind(appointment: AppointmentModel) {
+            currentAppointment = appointment
             binding.textViewAppointmentDate.text = appointment.date
             binding.textViewPetName.text = appointment.petName
-
-            itemView.setOnClickListener {
-                onAppointmentClick(appointment)
-            }
         }
     }
 

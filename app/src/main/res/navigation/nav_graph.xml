@@ -29,6 +29,12 @@
     <include app:graph="@navigation/home_nav_graph" />
 
     <action
+        android:id="@+id/action_global_services"
+        app:destination="@id/nav_services"/>
+
+    <include app:graph="@navigation/services_nav_graph" />
+
+    <action
         android:id="@+id/action_global_profile"
         app:destination="@id/nav_profile"/>
 

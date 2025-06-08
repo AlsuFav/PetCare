@@ -24,7 +24,6 @@ class AllPetsFragment: Fragment(R.layout.fragment_all_pets) {
     private val viewBinding: FragmentAllPetsBinding by viewBinding(FragmentAllPetsBinding::bind)
     private var rvAdapter: PetsAdapter? = null
     private var rvShimmerAdapter: PetsShimmerAdapter? = null
-
     private val allPetsViewModel: AllPetsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
