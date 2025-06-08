@@ -63,17 +63,4 @@ class PetsAdapter (
         pets.addAll(list)
         diffResult.dispatchUpdatesTo(this)
     }
-
-    fun removeItem(pet: PetModel): Int? {
-        val position = pets.indexOfFirst { it.id == pet.id }
-        if (position != -1) {
-            pets.removeAt(position)
-            return position
-        }
-        return null
-    }
-
-    fun getItem(position: Int): PetModel? {
-        return pets.getOrNull(position)
-    }
 }

@@ -2,10 +2,13 @@ package ru.fav.petcare.appointment.add.pet.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.fav.petcare.domain.model.PetModel
 import ru.fav.petcare.appointment.add.pet.databinding.ItemSelectPetBinding
+import ru.fav.petcare.appointment.add.pet.ui.util.PetDiffUtil
+import ru.fav.petcare.domain.model.ServiceModel
 import ru.fav.petcare.presentation.R
 
 class PetsAdapter (
@@ -28,7 +31,17 @@ class PetsAdapter (
     inner class PetViewHolder(private val binding: ItemSelectPetBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private var currentPet: PetModel? = null
+
+        init {
+            binding.root.setOnClickListener {
+                currentPet?.let { onPetClick(it) }
+            }
+        }
+
+
         fun bind(pet: PetModel) {
+            currentPet = pet
             binding.textViewPetName.text = pet.name
 
             val placeholder =
@@ -46,16 +59,14 @@ class PetsAdapter (
                     .error(placeholder)
                     .into(binding.imageViewPetPhoto)
             }
-
-            itemView.setOnClickListener {
-                onPetClick(pet)
-            }
         }
     }
 
     fun updateData(list: MutableList<PetModel>) {
+        val diff = PetDiffUtil(oldList = pets, newList = list)
+        val diffResult = DiffUtil.calculateDiff(diff)
         pets.clear()
         pets.addAll(list)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 }

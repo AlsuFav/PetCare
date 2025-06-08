@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity(), Nav.Provider {
 
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                ru.fav.petcare.authorization.R.id.destination_authorization -> hideBottomNavigation()
-                ru.fav.petcare.registration.R.id.destination_registration -> hideBottomNavigation()
-                else -> showBottomNavigation()
+                ru.fav.petcare.authorization.R.id.destination_authorization -> showBottomNavigation(false)
+                ru.fav.petcare.registration.R.id.destination_registration -> showBottomNavigation(false)
+                else -> showBottomNavigation(true)
             }
         }
     }
@@ -92,12 +92,8 @@ class MainActivity : AppCompatActivity(), Nav.Provider {
         }
     }
 
-    private fun showBottomNavigation() {
-        viewBinding.mainBottomNavigation.visibility = View.VISIBLE
-    }
-
-    private fun hideBottomNavigation() {
-        viewBinding.mainBottomNavigation.visibility = View.GONE
+    private fun showBottomNavigation(show: Boolean) {
+        viewBinding.mainBottomNavigation.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun getNavController(): NavController? {

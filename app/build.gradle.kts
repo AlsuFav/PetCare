@@ -1,17 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
-    id ("com.google.dagger.hilt.android")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.safe.args)
     alias(libs.plugins.google.services)
     alias(libs.plugins.crashlytics)
-    id(libs.plugins.gradle.secrets.plugin.get().pluginId)
+    alias(libs.plugins.gradle.secrets)
 }
 
 android {
     namespace = "ru.fav.petcare.app"
-    compileSdk = 35
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "ru.fav.petcare"

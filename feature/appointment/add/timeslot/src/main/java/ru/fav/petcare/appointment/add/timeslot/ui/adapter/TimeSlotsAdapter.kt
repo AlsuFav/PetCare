@@ -2,26 +2,34 @@ package ru.fav.petcare.appointment.add.timeslot.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.fav.petcare.appointment.add.timeslot.databinding.ItemTimeslotBinding
+import ru.fav.petcare.appointment.add.timeslot.ui.util.TimeSlotDiffUtil
+import ru.fav.petcare.domain.model.AppointmentModel
 import ru.fav.petcare.domain.model.TimeSlotModel
 
 class TimeSlotsAdapter(
     private val onTimeSlotClick: (TimeSlotModel) -> Unit
 ) : RecyclerView.Adapter<TimeSlotsAdapter.TimeSlotViewHolder>() {
 
-    private var timeSlots = listOf<TimeSlotModel>()
+    private var timeSlots = mutableListOf<TimeSlotModel>()
 
     inner class TimeSlotViewHolder(private val binding: ItemTimeslotBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private var currentTimeSlot: TimeSlotModel? = null
+
+        init {
+            binding.root.setOnClickListener {
+                currentTimeSlot?.let { onTimeSlotClick(it) }
+            }
+        }
         
         fun bind(timeSlot: TimeSlotModel) {
+            currentTimeSlot = timeSlot
             binding.textViewTime.text = timeSlot.time
             binding.textViewGroomer.text = timeSlot.groomerName
-            
-            itemView.setOnClickListener {
-                onTimeSlotClick(timeSlot)
-            }
         }
     }
 
@@ -38,7 +46,10 @@ class TimeSlotsAdapter(
     override fun getItemCount() = timeSlots.size
 
     fun updateData(newTimeSlots: List<TimeSlotModel>) {
-        timeSlots = newTimeSlots
-        notifyDataSetChanged()
+        val diff = TimeSlotDiffUtil(oldList = timeSlots, newList = newTimeSlots)
+        val diffResult = DiffUtil.calculateDiff(diff)
+        timeSlots.clear()
+        timeSlots.addAll(newTimeSlots)
+        diffResult.dispatchUpdatesTo(this)
     }
 }
