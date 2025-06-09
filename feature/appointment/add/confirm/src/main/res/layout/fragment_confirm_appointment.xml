@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,8 +8,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="32dp">
+
         <TextView
             android:id="@+id/textViewAppointmentCreation"
             android:layout_width="match_parent"
@@ -22,21 +24,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textViewLabelDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_date"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/textViewAppointmentCreation"
+            android:layout_marginTop="48dp"
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/appointment_date"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
             android:enabled="false"
-            app:layout_constraintTop_toBottomOf="@id/textViewAppointmentCreation"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelDate"
+            android:layout_marginTop="4dp"
             app:startIconDrawable="@drawable/ic_calendar"
+            app:startIconTint="@color/gray_medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="48dp"
-            app:layout_constraintHorizontal_bias="0.5">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextDate"
@@ -50,93 +63,137 @@
                 android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/textViewLabelPetName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pet_name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutDate"
+            android:layout_marginTop="24dp"
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutPetName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
             android:enabled="false"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutDate"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelPetName"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"
-            app:layout_constraintHorizontal_bias="0.5">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPetName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorSecondary"
-                android:hint="@string/pet_name"
                 android:inputType="textPersonName"
                 android:maxLength="50"
                 android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutGroomerName"
+        <TextView
+            android:id="@+id/textViewLabelGroomerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
-            android:enabled="false"
+            android:text="@string/groomer_name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutPetName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="24dp"
-            app:layout_constraintHorizontal_bias="0.5">
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutGroomerName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelGroomerName"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextGroomerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorSecondary"
-                android:hint="@string/groomer_name"
                 android:inputType="textPersonName"
                 android:maxLength="50"
                 android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutServiceName"
+        <TextView
+            android:id="@+id/textViewLabelServiceName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
-            android:enabled="false"
+            android:text="@string/service_name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutGroomerName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="24dp"
-            app:layout_constraintHorizontal_bias="0.5">
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutServiceName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelServiceName"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextServiceName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorSecondary"
-                android:hint="@string/service_name"
                 android:inputType="text"
                 android:maxLength="50"
                 android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPrice"
+        <TextView
+            android:id="@+id/textViewLabelPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/price"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
-            android:enabled="false"
+            android:text="@string/price"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutServiceName"
-            app:startIconDrawable="@drawable/ic_ruble"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="24dp"
-            app:layout_constraintHorizontal_bias="0.5">
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPrice"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelPrice"
+            android:layout_marginTop="4dp"
+            app:startIconDrawable="@drawable/ic_ruble"
+            app:startIconTint="@color/gray_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPrice"
@@ -149,29 +206,6 @@
                 android:inputType="none"
                 android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:textColor="?attr/colorOnPrimaryContainer"
-            android:backgroundTint="?attr/colorPrimaryContainer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <Button
-            android:id="@+id/buttonBack"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/back"
-            android:textColor="?attr/colorOnSecondaryContainer"
-            android:backgroundTint="?attr/colorSecondaryContainer"
-            app:layout_constraintBottom_toTopOf="@id/buttonCancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
             android:id="@+id/buttonConfirmAppointment"
@@ -188,6 +222,28 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="40dp"/>
 
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            app:layout_constraintBottom_toTopOf="@id/buttonCancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:backgroundTint="?attr/colorPrimaryContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

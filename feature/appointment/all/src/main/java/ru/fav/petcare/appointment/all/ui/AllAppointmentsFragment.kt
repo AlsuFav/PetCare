@@ -98,8 +98,8 @@ class AllAppointmentsFragment: Fragment(R.layout.fragment_all_appointments) {
 
     private fun showAppointmentMode(upcoming: Boolean) {
         viewBinding.apply {
-            buttonUpcomingAppointment.isVisible = !upcoming
-            buttonPassedAppointment.isVisible = upcoming
+            buttonUpcomingAppointment.visibility = if (upcoming) View.INVISIBLE else View.VISIBLE
+            buttonPassedAppointment.visibility = if (upcoming) View.VISIBLE else View.INVISIBLE
 
             textViewAppointmentList.apply {
                 text = if (upcoming) {
