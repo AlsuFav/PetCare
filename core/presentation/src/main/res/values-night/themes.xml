@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/gray_medium</item>
 
         <item name="colorSurfaceContainerHigh">@color/beige</item>
-        <item name="colorSurfaceContainer">@color/gray_light</item>
+        <item name="colorSurfaceContainer">@color/gray_dark</item>
 
         <item name="colorPrimaryContainer">@color/brown_light</item>
         <item name="colorOnPrimaryContainer">@color/black</item>

@@ -178,6 +178,9 @@ class PetDetailsFragment: Fragment(R.layout.fragment_pet_details) {
 
             textInputLayoutName.isEnabled = show
             textInputLayoutBirthDate.isEnabled = show
+
+            editTextSpecies.alpha = if (show) 0.6F else 1F
+            editTextBreed.alpha = if (show) 0.6F else 1F
         }
     }
 
@@ -188,6 +191,7 @@ class PetDetailsFragment: Fragment(R.layout.fragment_pet_details) {
             editTextBirthDate.setText(pet.birthDate)
 
             if (pet.species == getString(ru.fav.petcare.presentation.R.string.dog)) {
+                textViewLabelBreed.visibility = View.VISIBLE
                 textInputLayoutBreed.visibility = View.VISIBLE
                 editTextBreed.setText(pet.breed)
             }

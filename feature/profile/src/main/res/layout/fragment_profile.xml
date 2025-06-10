@@ -1,185 +1,226 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp">
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
-        android:contentDescription="@string/petcare_logo"
-        android:src="@drawable/ic_petcare_grooming_salon"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/textViewTitle"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />
+        android:padding="32dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hintEnabled="true"
-        app:hintAnimationEnabled="true"
-        android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        app:layout_constraintHorizontal_bias="0.5">
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:contentDescription="@string/petcare_logo"
+            android:src="@drawable/ic_petcare_grooming_salon"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextFirstName"
+        <TextView
+            android:id="@+id/textViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorSecondary"
-            android:hint="@string/first_name"
-            android:inputType="textPersonName"
-            android:maxLength="50"
-            android:padding="16dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="16dp"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutLastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hintEnabled="true"
-        app:hintAnimationEnabled="true"
-        android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutFirstName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.5">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextLastName"
+        <TextView
+            android:id="@+id/textViewLabelFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorSecondary"
-            android:hint="@string/last_name"
-            android:inputType="textPersonName"
-            android:maxLength="50"
-            android:padding="16dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:text="@string/first_name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            android:layout_marginTop="32dp"
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hintEnabled="true"
-        app:hintAnimationEnabled="true"
-        android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutLastName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.5">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextPhone"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorSecondary"
-            android:hint="@string/phone"
-            android:inputType="phone"
-            android:maxLength="18"
-            android:padding="16dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelFirstName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"
+            app:layout_constraintHorizontal_bias="0.5">
 
-    <TextView
-        android:id="@+id/textError"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPhone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorSecondary"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:padding="16dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/edit"
-        android:textColor="?attr/colorOnPrimaryContainer"
-        android:backgroundTint="?attr/colorPrimaryContainer"
-        app:layout_constraintTop_toBottomOf="@id/textError"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        <TextView
+            android:id="@+id/textViewLabelLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/last_name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutFirstName"
+            android:layout_marginTop="16dp"
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/buttonSave"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="@string/save"
-        android:textColor="?attr/colorOnPrimaryContainer"
-        android:backgroundTint="?attr/colorPrimaryContainer"
-        app:layout_constraintTop_toBottomOf="@id/textError"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelLastName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"
+            app:layout_constraintHorizontal_bias="0.5">
 
-    <Button
-        android:id="@+id/buttonCancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="@string/cancel"
-        android:textColor="?attr/colorOnSecondaryContainer"
-        android:backgroundTint="?attr/colorSecondaryContainer"
-        app:layout_constraintTop_toBottomOf="@id/buttonSave"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorSecondary"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:padding="16dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonSafety"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/safety"
-        android:textColor="?attr/colorOnSecondaryContainer"
-        android:backgroundTint="?attr/colorSecondaryContainer"
-        app:icon="@drawable/ic_lock"
-        app:iconGravity="textStart"
-        app:iconTint="?attr/colorOnSecondaryContainer"
-        app:layout_constraintTop_toBottomOf="@id/buttonEdit"
-        app:layout_constraintBottom_toTopOf="@id/buttonLogOut"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="1"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            android:id="@+id/textViewLabelPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLastName"
+            android:layout_marginTop="16dp"
+            android:alpha="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/buttonLogOut"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/log_out"
-        android:textColor="?attr/colorOnPrimaryContainer"
-        android:backgroundTint="?attr/colorPrimaryContainer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxStrokeWidth="0dp"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelPhone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"
+            app:layout_constraintHorizontal_bias="0.5">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorSecondary"
+                android:inputType="phone"
+                android:maxLength="18"
+                android:padding="16dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPhone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/buttonEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:backgroundTint="?attr/colorPrimaryContainer"
+            app:layout_constraintTop_toBottomOf="@id/textError"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"/>
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/save"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:backgroundTint="?attr/colorPrimaryContainer"
+            app:layout_constraintTop_toBottomOf="@id/textError"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="40dp"/>
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/cancel"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            app:layout_constraintTop_toBottomOf="@id/buttonSave"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/buttonSafety"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/safety"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            app:icon="@drawable/ic_lock"
+            app:iconGravity="textStart"
+            app:iconTint="?attr/colorOnSecondaryContainer"
+            app:layout_constraintTop_toBottomOf="@id/buttonEdit"
+            app:layout_constraintBottom_toTopOf="@id/buttonLogOut"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="1"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/buttonLogOut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/log_out"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:backgroundTint="?attr/colorPrimaryContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
