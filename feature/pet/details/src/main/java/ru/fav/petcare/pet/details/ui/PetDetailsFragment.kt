@@ -179,10 +179,18 @@ class PetDetailsFragment: Fragment(R.layout.fragment_pet_details) {
             textInputLayoutName.isEnabled = show
             textInputLayoutBirthDate.isEnabled = show
 
-            textViewLabelSpecies.alpha = if (show) 0.6F else 0.8F
-            textViewLabelBreed.alpha = if (show) 0.6F else 0.8F
-            editTextSpecies.alpha = if (show) 0.6F else 1F
-            editTextBreed.alpha = if (show) 0.6F else 1F
+            textViewLabelSpecies.isVisible = !show
+            textInputLayoutSpecies.isVisible = !show
+
+            if (editTextSpecies.text.toString() == getString(ru.fav.petcare.presentation.R.string.dog)) {
+                textViewLabelBreed.isVisible = !show
+                textInputLayoutBreed.isVisible = !show
+            }
+
+//            textViewLabelSpecies.alpha = if (show) 0.6F else 0.8F
+//            textViewLabelBreed.alpha = if (show) 0.6F else 0.8F
+//            editTextSpecies.alpha = if (show) 0.6F else 1F
+//            editTextBreed.alpha = if (show) 0.6F else 1F
         }
     }
 
