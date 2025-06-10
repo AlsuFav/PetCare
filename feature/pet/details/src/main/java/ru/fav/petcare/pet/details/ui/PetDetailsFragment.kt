@@ -1,10 +1,12 @@
 package ru.fav.petcare.pet.details.ui
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -179,6 +181,13 @@ class PetDetailsFragment: Fragment(R.layout.fragment_pet_details) {
             textInputLayoutName.isEnabled = show
             textInputLayoutBirthDate.isEnabled = show
 
+            if (show) {
+                editTextName.requestFocus()
+                editTextName.setSelection(editTextName.text?.length ?: 0)
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(editTextName, InputMethodManager.SHOW_IMPLICIT)
+            }
+
             textViewLabelSpecies.isVisible = !show
             textInputLayoutSpecies.isVisible = !show
 
@@ -186,11 +195,6 @@ class PetDetailsFragment: Fragment(R.layout.fragment_pet_details) {
                 textViewLabelBreed.isVisible = !show
                 textInputLayoutBreed.isVisible = !show
             }
-
-//            textViewLabelSpecies.alpha = if (show) 0.6F else 0.8F
-//            textViewLabelBreed.alpha = if (show) 0.6F else 0.8F
-//            editTextSpecies.alpha = if (show) 0.6F else 1F
-//            editTextBreed.alpha = if (show) 0.6F else 1F
         }
     }
 

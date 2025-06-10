@@ -1,7 +1,9 @@
 package ru.fav.petcare.profile.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -163,6 +165,14 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             textInputLayoutFirstName.isEnabled = show
             textInputLayoutLastName.isEnabled = show
             textInputLayoutPhone.isEnabled = show
+
+            if (show) {
+                editTextFirstName.requestFocus()
+                editTextFirstName.setSelection(editTextFirstName.text?.length ?: 0)
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(editTextFirstName, InputMethodManager.SHOW_IMPLICIT)
+            }
+
         }
     }
 
