@@ -34,7 +34,7 @@
     <string name="service_name">Название услуги</string>
 
     <string name="no_pets">Cписок питомцев пуст. Добавьте питомца</string>
-    <string name="no_services">К сожалению, писок услуг пуст</string>
+    <string name="no_services">К сожалению, cписок услуг пуст</string>
 
     <string name="error_title">Ошибка</string>
     <string name="confirmation_title">Подтверждение</string>
