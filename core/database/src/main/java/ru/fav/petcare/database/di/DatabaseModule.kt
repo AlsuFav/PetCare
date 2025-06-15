@@ -19,13 +19,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
     private val databaseName = "app_database"
+    private val preferencesName = "app_preferences"
 
     @Provides
     @Singleton
     fun providePreferencesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             produceFile = {
-                context.preferencesDataStoreFile("app_preferences")
+                context.preferencesDataStoreFile(preferencesName)
             }
         )
     }
